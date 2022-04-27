@@ -14,6 +14,8 @@ import Product from "./views/Product";
 import Login from "./views/Auth/Login";
 import Register from "./views/Auth/Register";
 import Cart from "./views/Cart";
+import WishList from "./views/WishList";
+import BreadCrumb from "./Components/Layouts/BreadCrumb";
 
 class App extends Component {
 
@@ -32,6 +34,7 @@ class App extends Component {
       <BrowserRouter>
         
             <Header />
+            <BreadCrumb/>
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -41,6 +44,7 @@ class App extends Component {
               <Route path="/login" element={<Login/>} />
               <Route path="/register" element={<Register/>} />
               <Route path="/cart" element={<Cart/>} />
+              <Route path="/wishlist" element={<WishList/>} />
             </Routes>
           
             <Footer/>

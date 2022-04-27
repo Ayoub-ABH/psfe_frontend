@@ -10,7 +10,7 @@ export default class Navigation extends Component {
                 <div id="responsive-nav">
                 {/*<!-- NAV -->*/} 
                     <ul class="main-nav nav navbar-nav">
-                        <li ><Link to="/">Home</Link></li>
+                        <li className='active'><Link to="/">Home</Link></li>
                         <li><Link to="shop">Shop</Link></li>
                         <li><Link to="contact">Contact</Link></li>
                         <li><Link to="About">About</Link></li>

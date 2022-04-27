@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import HeaderCart from "./HeaderCart";
 import Navigation from "./Navigation";
+import { Link } from "react-router-dom";
 
 export default class Header extends Component {
   render() {
@@ -33,9 +34,9 @@ export default class Header extends Component {
                 </a>
               </li>
               <li>
-                <a href="#">
+                <Link to="/profile">
                   <i className="fa fa-user-o" /> My Account
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -80,11 +81,11 @@ export default class Header extends Component {
                 <div className="header-ctn">
                   {/*<!-- Wishlist -->*/}
                   <div>
-                    <a href="#">
+                    <Link to="/wishlist">
                       <i className="fa fa-heart-o" />
                       <span>Your Wishlist</span>
                       <div className="qty">2</div>
-                    </a>
+                    </Link>
                   </div>
 
                   {/*<!-- /Wishlist -->*/}

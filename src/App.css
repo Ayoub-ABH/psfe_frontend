@@ -39,7 +39,7 @@
 /*product*/
 .cart-prods{
     padding: 5px;
-    margin-top: 15px;  
+    margin-top: 15px;
     border: 1px solid black;
     max-height: 480px;
     overflow-y: scroll;
@@ -74,3 +74,10 @@
     text-align: center;
 }
 /*product*/
+
+
+/*cart*/
+.cart-mounts{
+    margin-top: 40px;
+}
+/*cart*/

@@ -5,7 +5,9 @@ export default class Cart extends Component {
   render() {
     return (
       <div className="section">
+
         <div className="container cart-prods">
+
           <div className="row c-product">
             <div className="col-lg-2 ">
               <p className="pro-num">1</p>
@@ -115,24 +117,21 @@ export default class Cart extends Component {
           </div>
         </div>
 
-        <div className="section">
-            <div className="container">
-              <div className="row">
-              <div className="cart-summary">
-                  <h3>3 Item(s) selected</h3>
-                  <h4>SUBTOTAL: $2940.00</h4>
-                </div>
-                <div className="cart-btns">
-                  <Link  to="/checkout">
-                  Checkout <i className="fa fa-arrow-circle-right" />
-                  </Link>
-                  <Link  to="/shop">
-                    continue shopping 
-                  </Link>
-                </div>
-              </div>
+        <div className="container cart-mounts">
+          <div className="row">
+            <div className="cart-summary">
+              <h3>3 Product(s) on the cart</h3>
+              <h4>SUBTOTAL: $2940.00</h4>
             </div>
-
+            <div className="cart-btns">
+              <Link className="btn btn-success" to="/checkout">
+                Checkout <i className="fa fa-arrow-circle-right" />
+              </Link>
+              <Link className="btn btn-warning nr-l" to="/shop">
+                continue shopping 
+              </Link>
+            </div>
+          </div>
         </div>
 
 
