@@ -5,6 +5,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Header from "./Components/Layouts/Header";
 import Footer from "./Components/Layouts/Footer";
 import Home from "./views/Home";
@@ -49,6 +51,7 @@ class App extends Component {
           
             <Footer/>
         </BrowserRouter>
+        <ToastContainer />
        </div>
       
     );
