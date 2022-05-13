@@ -30,9 +30,9 @@ function Register() {
     if (isSuccess) {
       navigate('/login')
     }
+    dispatch(reset())
 
-    dispatch(reset)
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+  }, [ isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
     setUserForm((prevState) => ({
@@ -114,6 +114,8 @@ function Register() {
             <button type="submit" class="btn btn-primary mb-2">
               Register
             </button>
+
+            
           </form>
         </div>
       </div>

@@ -1,8 +1,50 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
+import { login, reset } from '../../features/user/userSlice';
 
-export default class  extends Component {
-  render() {
+
+
+
+function Login() {
+    const [userForm,setUserForm] = useState({
+      email:"",
+      password:""
+    })
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+      (state) => state.users
+    )
+
+    const onchange = (e)=>{
+       setUserForm({
+         ...userForm,
+         [e.target.name]:e.target.value
+       })
+    }
+
+    useEffect(()=>{
+      if (isError) {
+        toast.error(message)
+      } 
+
+      if (isSuccess ) {
+        navigate('/')   
+      }
+
+      dispatch(reset())
+    },[user,isError, isSuccess])
+
+
+    const onsubmit = (e)=>{
+      e.preventDefault();
+      dispatch(login(userForm))
+    }
+  
     return (
       <div>
        
@@ -13,17 +55,17 @@ export default class  extends Component {
         </div>
         <div class="card-body">
             
-            <form action="" method="POST" role="form">
+            <form onSubmit={onsubmit} role="form">
                 
             
                 <div class="form-group mb-2">
-                    <label htmlfor="">Email</label>
-                    <input type="text" class="input" id="" placeholder="Email"/>
+                    <label htmlfor="email">Email</label>
+                    <input type="text" class="input" name='email' onChange={onchange} placeholder="Email"/>
                 </div>
 
                 <div class="form-group mb-2">
-                    <label htmlFor="">Password</label>
-                    <input type="text" class="input" id="" placeholder="password"/>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" class="input" name='password' onChange={onchange} placeholder="password"/>
                 </div>
                 
             
@@ -42,5 +84,6 @@ export default class  extends Component {
        
       </div>
     )
-  }
 }
+export default Login;
+

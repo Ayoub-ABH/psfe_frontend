@@ -81,3 +81,38 @@
     margin-top: 40px;
 }
 /*cart*/
+
+
+/**/
+.drd-links-1{
+    color: black !important;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+}
+.drd-links-2{
+    color: black !important;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+}
+.hl-mt{
+    margin-top: 7px;
+}
+/**/
+
+
+/**/
+.backdrop{
+    position: fixed;
+    background-color: beige;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    opacity: 0.5;
+}
+/**/

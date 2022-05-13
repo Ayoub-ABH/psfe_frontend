@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
-export default class Navigation extends Component {
-  render() {
+function Navigation() {
+  const { user } = useSelector((state) => state.users);
+
     return (
         <nav id="navigation">
             <div className="container">
@@ -14,8 +15,17 @@ export default class Navigation extends Component {
                         <li><Link to="shop">Shop</Link></li>
                         <li><Link to="contact">Contact</Link></li>
                         <li><Link to="About">About</Link></li>
-                        <li><Link to="login">Login</Link></li>
-                        <li><Link to="register">Register</Link></li>
+
+
+                        {user ? 
+                            <></>
+                            :
+                            <>
+                                <li><Link to="login">Login</Link></li>
+                                <li><Link to="register">Register</Link></li>
+                            </>
+                        }
+                        
                     </ul>
                     {/*<!-- /NAV -->*/}
                 </div>
@@ -23,5 +33,6 @@ export default class Navigation extends Component {
             </div>
         </nav>
     )
-  }
+  
 }
+export default Navigation;

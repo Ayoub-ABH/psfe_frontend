@@ -1,18 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import NewProduct from '../Components/Home/NewProduct'
 import TopSelling from '../Components/Home/TopSelling'
 
-export default class Home extends Component {
+function Home()  {
 
-	componentDidMount = () =>{
-		
+	useEffect(() =>{
 		const script = document.createElement("script");
 		script.src = "./js/main.js";
     	script.async=true;
 		document.body.appendChild(script);
-	}
+	}) 
 
-  render() {
     return (
       <div>
           
@@ -30,7 +29,7 @@ export default class Home extends Component {
 							</div>
 							<div className="shop-body">
 							<h3>Laptop<br />Collection</h3>
-							<a href="#" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right" /></a>
+							<Link to="/shop" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right" /></Link>
 							</div>
 						</div>
 					</div>
@@ -45,7 +44,7 @@ export default class Home extends Component {
 							</div>
 							<div className="shop-body">
 							<h3>Accessories<br />Collection</h3>
-							<a href="#" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right" /></a>
+							<Link to="/shop" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right" /></Link>
 							</div>
 						</div>
 					</div>
@@ -60,7 +59,7 @@ export default class Home extends Component {
 							</div>
 							<div className="shop-body">
 							<h3>Cameras<br />Collection</h3>
-							<a href="#" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right" /></a>
+							<Link to="/shop" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right" /></Link>
 							</div>
 						</div>
 					</div>
@@ -134,5 +133,7 @@ export default class Home extends Component {
 		
       </div>
     )
-  }
+  
 }
+
+export default Home;
