@@ -113,6 +113,28 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    opacity: 0.5;
+    opacity: 0.9;
+}
+
+.input-radio-shop{
+    margin-right: 9px !important;
+    width: 16px;
+    height: 16px;
+}
+
+.input-page{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #FFF;
+    border: 1px solid #E4E7ED;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+}
+.in-active{
+    color: white;
+    background-color: #d10024;
 }
 /**/

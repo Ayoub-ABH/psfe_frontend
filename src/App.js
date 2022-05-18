@@ -26,10 +26,11 @@ function App() {
 		script.src = "./js/main.js";
     script.async=true;
 		document.body.appendChild(script);
+
 	}) 
 
-  const { isLoading} = useSelector(
-    (state) => state.users
+  const {isLoading } = useSelector(
+    (state) =>state.products
   )
   
 

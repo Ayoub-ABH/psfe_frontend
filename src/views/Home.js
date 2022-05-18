@@ -1,18 +1,29 @@
-import React, { Component, useEffect } from 'react'
+import React, { Component, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 import NewProduct from '../Components/Home/NewProduct'
 import TopSelling from '../Components/Home/TopSelling'
+import { getHomeProducts, reset } from '../features/product/productSlice';
 
-function Home()  {
+const  Home  =() => {
+	
+    const dispatch = useDispatch()
+	const {products,isSuccess,isError,message}= useSelector((state)=>state.products);
+	
+	useEffect(  () =>{
+		if (isError) {
+			toast.error(message)
+		} 
+		if(!isSuccess)
+	    dispatch(getHomeProducts());
 
-	useEffect(() =>{
-		const script = document.createElement("script");
-		script.src = "./js/main.js";
-    	script.async=true;
-		document.body.appendChild(script);
-	}) 
+	},[]) 
+
+	
 
     return (
+		
       <div>
           
 		{/*<!-- SECTION shop-->*/}
@@ -20,7 +31,6 @@ function Home()  {
 			<div className="container">
 				<div className="row">
     
-
 					{/*<!-- shop -->*/}
 					<div className="col-md-4 col-xs-6">
 						<div className="shop">
@@ -70,10 +80,15 @@ function Home()  {
 		</div>
 		{/*!-- /SECTION shop-->*/}
 
+	    
 
+
+		
 
 		{/* !-- /SECTION New Product-->*/}
-		<NewProduct/>
+
+		{ isSuccess  ? (<NewProduct  products={products.new} slick={1}/>) : (<></>)}
+		
 		{/* !-- /SECTION New Product-->*/}
 
 
@@ -121,11 +136,12 @@ function Home()  {
 		{/*<!-- /HOT DEAL SECTION -->*/}
 
 		{/* !-- /SECTION New Product-->*/}
-		<NewProduct/>
+		{ isSuccess  ? (<NewProduct  products={products.new} slick={2}/>) : (<></>)}
+		
 		{/* !-- /SECTION New Product-->*/}
 
 		{/* !-- /SECTION New Product-->*/}
-		<TopSelling/>
+		{ isSuccess  ? (<TopSelling  products={products.top}/>) : (<></>)}
 		{/* !-- /SECTION New Product-->*/}
 
 

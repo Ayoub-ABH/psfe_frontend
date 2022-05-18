@@ -2,7 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import productService from "./productServices";
 
 const initialState = {
-  products: [],
+  products: {new :[],top:[]}, 
+  shopProducts:{},
+  categories:[],
+  brands:[],
   cardProducts:[],
   isSuccess: false,
   isLoading: false,
@@ -11,11 +14,11 @@ const initialState = {
 }
 
 //get newPoducts
-export const getNewProducts = createAsyncThunk(
+export const getHomeProducts = createAsyncThunk(
     "product/getNew",
-    async (thunkAPI) => {
+    async (_,thunkAPI) => {
       try {
-        return await productService.getNewProducts();
+        return await productService.getHomeProducts();
       } catch (error) {
         const message =
           (error.response &&
@@ -28,19 +31,102 @@ export const getNewProducts = createAsyncThunk(
     }
   );
 
+//get allProducts
+export const getAllProducts = createAsyncThunk(
+  "product/getAll",
+  async (_,thunkAPI) => {
+    try {
+      return await productService.getAllProducts();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+//get SomeProducts
+export const getSomeProducts = createAsyncThunk(
+  "product/getSome",
+  async (query,thunkAPI) => {
+    try {
+      return await productService.getSomeProducts(query);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 
 
 const productSlice = createSlice({
     name: "product",
     initialState,
     reducers: {
-      
+      reset: (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = false;
+        state.message = "";
+      }
+
     },
-    extraReducers: () => {
-        
+    extraReducers: (builder) => {
+      builder
+      .addCase(getHomeProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getHomeProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.products=action.payload;
+      })
+      .addCase(getHomeProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      
+      
+      .addCase(getAllProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.shopProducts=action.payload;
+        state.brands=[...new Set(action.payload.docs.map((p) => p.brand))];
+        state.categories=[...new Set(action.payload.docs.map((p) => p.category))];
+      })
+      .addCase(getAllProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getSomeProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.shopProducts=action.payload;
+      })
+      .addCase(getSomeProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
     },
 });
 
 
-//export const { } = productSlice.actions;
+export const { reset } = productSlice.actions;
 export default productSlice.reducer;
