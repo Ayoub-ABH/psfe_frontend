@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 function TopSelling(props) {
 
@@ -23,12 +24,12 @@ function TopSelling(props) {
 
                     <div key={product._id} className="product-widget">
                       <div className="product-img">
-                        <img src={`./img/${product.image}`} alt={`${product.image}`} />
+                        <img src={`/img/${product.image}`} alt={`${product.image}`} />
                       </div>
                       <div className="product-body">
                         <p className="product-category">{product.category}</p>
                         <h3 className="product-name">
-                          <a href="/">{product.name}</a>
+                          <Link to={`/product/${product._id}`}>{product.name}</Link>
                         </h3>
                         <h4 className="product-price">
                           ${product.price}{" "}
@@ -51,7 +52,7 @@ function TopSelling(props) {
                       <div className="product-body">
                         <p className="product-category">{product.category}</p>
                         <h3 className="product-name">
-                          <a href="/">{product.name}</a>
+                        <Link to={`/product/${product._id}`}>{product.name}</Link>
                         </h3>
                         <h4 className="product-price">
                           ${product.price}{" "}
@@ -84,7 +85,7 @@ function TopSelling(props) {
                       <div className="product-body">
                         <p className="product-category">{product.category}</p>
                         <h3 className="product-name">
-                          <a href="/">{product.name}</a>
+                        <Link to={`/product/${product._id}`}>{product.name}</Link>
                         </h3>
                         <h4 className="product-price">
                           ${product.price}{" "}
@@ -107,7 +108,7 @@ function TopSelling(props) {
                       <div className="product-body">
                         <p className="product-category">{product.category}</p>
                         <h3 className="product-name">
-                          <a href="/">{product.name}</a>
+                        <Link to={`/product/${product._id}`}>{product.name}</Link>
                         </h3>
                         <h4 className="product-price">
                           ${product.price}{" "}
@@ -141,7 +142,7 @@ function TopSelling(props) {
                       <div className="product-body">
                         <p className="product-category">{product.category}</p>
                         <h3 className="product-name">
-                          <a href="/">{product.name}</a>
+                        <Link to={`/product/${product._id}`}>{product.name}</Link>
                         </h3>
                         <h4 className="product-price">
                           ${product.price}{" "}
@@ -164,7 +165,7 @@ function TopSelling(props) {
                       <div className="product-body">
                         <p className="product-category">{product.category}</p>
                         <h3 className="product-name">
-                          <a href="/">{product.name}</a>
+                        <Link to={`/product/${product._id}`}>{product.name}</Link>
                         </h3>
                         <h4 className="product-price">
                           ${product.price}{" "}

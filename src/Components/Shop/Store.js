@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import Rating from "../Product/Rating";
+import {Link} from 'react-router-dom'
 
 function Store(props) {
 
@@ -19,8 +20,8 @@ function Store(props) {
             {/* <!-- product -->*/}
             {props.products.docs.map((product)=>
               <>
-                    <div className="col-md-4 col-sm-6">
-                    <div className="product" key={product._id}>
+                    <div className="col-md-4 col-sm-6" key={product._id}>
+                    <div className="product" >
                           <div className="product-img">
                             <img src={`./img/${product.image}`} alt={`${product.image}`} />
                             {/* <div className="product-label">
@@ -31,7 +32,7 @@ function Store(props) {
                           <div className="product-body">
                             <p className="product-category">{product.category}</p>
                             <h3 className="product-name">
-                              <a href="/">{product.name}</a>
+                            <Link to={"/product/"+product._id}>{product.name}</Link>
                             </h3>
                             <h4 className="product-price">
                               ${product.price} {" "}

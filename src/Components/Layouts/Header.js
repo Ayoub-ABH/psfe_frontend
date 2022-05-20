@@ -3,14 +3,45 @@ import Navigation from "./Navigation";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/user/userSlice";
+import { toast } from "react-toastify";
+import { getAllProducts, getSomeProducts } from "../../features/product/productSlice";
+import { useEffect, useState } from "react";
 
 function Header() {
+  const [searchQuery,setSearchQuery] = useState({
+    category:"",
+    name:""
+  })
   const { user } = useSelector((state) => state.users);
+  const { categories, isSuccess, isError, message } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate()
+
+  const onchange = (e)=>{
+    setSearchQuery({   
+      ...searchQuery,   
+      [e.target.name]:e.target.value
+    })
+
+ }
+
   const onLogout = ()=>{
     dispatch(logout())
     navigate('/')
+  }
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    dispatch(getAllProducts());
+    
+  }, []);
+
+  const onsubmit = (e)=>{
+    e.preventDefault();
+    dispatch(getSomeProducts(searchQuery))
+    navigate('/shop')
   }
 
   return (
@@ -108,13 +139,15 @@ function Header() {
             {/*<!-- SEARCH BAR -->*/}
             <div className="col-md-6">
               <div className="header-search">
-                <form>
-                  <select className="input-select">
-                    <option value={0}>All Categories</option>
-                    <option value={1}>Category 01</option>
-                    <option value={1}>Category 02</option>
+                <form onSubmit={onsubmit}>
+                  <select className="input-select" name="category" onChange={onchange}>
+                  <option value={""}>allCategories</option>
+                    {categories.map((category)=>
+                    <option value={category}>{category}</option>
+                    )}
+                    
                   </select>
-                  <input className="input" placeholder="Search here" />
+                  <input className="input" name="name" onChange={onchange} placeholder="Search here" />
                   <button className="search-btn">Search</button>
                 </form>
               </div>

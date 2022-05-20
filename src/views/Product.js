@@ -1,11 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import ProductDetail from '../Components/Product/ProductDetail'
 import ProductTabs from '../Components/Product/ProductTabs'
 import RelatedProds from '../Components/Product/RelatedProds'
+import { getOneProduct } from '../features/product/productSlice';
 
-export default class Product extends Component {
+function Product() {
+
+
+  const { id } = useParams();  
+  const dispatch = useDispatch();
+	const {product,isSuccess,isError,message}= useSelector((state)=>state.products);
   
-  render() {
+
+  useEffect(()=>{
+    if(isError)
+    toast.message(message)
+
+    dispatch(getOneProduct(id));
+
+  },[])
+  
     return (
       <div>
             {/*<!-- SECTION -->*/}
@@ -14,8 +31,10 @@ export default class Product extends Component {
                 <div className="container">
                     {/*<!-- row -->*/}
                     <div className="row">
-                    <ProductDetail/>
-                    <ProductTabs/>
+
+                    {isSuccess ? (<ProductDetail product={product} />) : (<></>)}
+                    {isSuccess ? (<ProductTabs product={product} />) : (<></>)}
+                    
                     </div>
                     {/*<!-- /row -->*/}
                 </div>
@@ -24,5 +43,8 @@ export default class Product extends Component {
             <RelatedProds/>  
       </div>
     )
-  }
+  
 }
+
+
+export default Product;

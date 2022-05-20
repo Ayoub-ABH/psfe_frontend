@@ -15,7 +15,6 @@ const  Home  =() => {
 		if (isError) {
 			toast.error(message)
 		} 
-		if(!isSuccess)
 	    dispatch(getHomeProducts());
 
 	},[]) 

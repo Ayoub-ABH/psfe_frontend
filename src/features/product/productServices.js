@@ -24,6 +24,12 @@ const getSomeProducts = async (query) => {
   const response = await axios.get(API_URL+'shop/allPrs',{params:query})
   return response.data;
 }
+
+// get one Products
+const getOneProduct = async (id) => {
+  const response = await axios.get(API_URL+id)
+  return response.data;
+}
   
   
   
@@ -31,7 +37,8 @@ const getSomeProducts = async (query) => {
   const productService = {
     getHomeProducts,
     getAllProducts,
-    getSomeProducts
+    getSomeProducts,
+    getOneProduct
   }
   
   export default productService;

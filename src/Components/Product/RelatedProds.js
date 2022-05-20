@@ -18,7 +18,7 @@ export default class RelatedProds extends Component {
             <div className="col-md-3 col-xs-6">
               <div className="product">
                 <div className="product-img">
-                  <img src="./img/product01.png" alt />
+                  <img src="/img/product01.png" alt />
                   <div className="product-label">
                     <span className="sale">-30%</span>
                   </div>
@@ -61,7 +61,7 @@ export default class RelatedProds extends Component {
             <div className="col-md-3 col-xs-6">
               <div className="product">
                 <div className="product-img">
-                  <img src="./img/product02.png" alt />
+                  <img src="/img/product02.png" alt />
                   <div className="product-label">
                     <span className="new">NEW</span>
                   </div>
@@ -112,7 +112,7 @@ export default class RelatedProds extends Component {
             <div className="col-md-3 col-xs-6">
               <div className="product">
                 <div className="product-img">
-                  <img src="./img/product03.png" alt />
+                  <img src="/img/product03.png" alt />
                 </div>
                 <div className="product-body">
                   <p className="product-category">Category</p>
@@ -158,7 +158,7 @@ export default class RelatedProds extends Component {
             <div className="col-md-3 col-xs-6">
               <div className="product">
                 <div className="product-img">
-                  <img src="./img/product04.png" alt />
+                  <img src="/img/product04.png" alt />
                 </div>
                 <div className="product-body">
                   <p className="product-category">Category</p>

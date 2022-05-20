@@ -37,13 +37,7 @@
 
 
 /*product*/
-.cart-prods{
-    padding: 5px;
-    margin-top: 15px;
-    border: 1px solid black;
-    max-height: 480px;
-    overflow-y: scroll;
-}
+
 .c-product-rating{
     color: #ef233c;
 }
@@ -73,12 +67,23 @@
     margin: 41% auto;
     text-align: center;
 }
+.product-quantity{
+    margin: 0px 14px;
+    font-size: 15px;
+    padding-top: 1px;
+    font-weight: bold;
+}
+.sum-cart{
+    padding-left: 50px;
+}
+
 /*product*/
 
 
 /*cart*/
 .cart-mounts{
     margin-top: 40px;
+
 }
 /*cart*/
 

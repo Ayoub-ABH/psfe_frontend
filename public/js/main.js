@@ -7,12 +7,8 @@
 			$('#responsive-nav').toggleClass('active');
 		})
 	
-		// Fix cart dropdown from closing
-		/*$('.cart-dropdown').on('click', function (e) {
-			e.stopPropagation();
-		});*/
+		
 	
-		/////////////////////////////////////////
 	
 		// Products Slick
 		$('.products-slick').each(function() {

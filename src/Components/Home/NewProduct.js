@@ -1,7 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { addToCart } from "../../features/product/cartSlice";
 import Rating from "../Product/Rating";
+import { useDispatch } from 'react-redux';
+
 
 function NewProduct(props) {
+
+  const dispatch = useDispatch()
+
+  const handleAddToCart=(product)=>{
+    dispatch(addToCart(product))
+  }
+
+
   return (
     <div className="section">
       {/*<!-- SECTION -->*/}
@@ -50,7 +61,7 @@ function NewProduct(props) {
                     {props.products.map((product) => (
                       <div className="product" key={product._id}>
                         <div className="product-img">
-                          <img src={`./img/${product.image}`} alt={`${product.image}`} />
+                          <img src={`/img/${product.image}`} alt={`${product.image}`} />
                           {/* <div className="product-label">
                             <span className="sale">-30%</span>
                             <span className="new">NEW</span>
@@ -59,7 +70,7 @@ function NewProduct(props) {
                         <div className="product-body">
                           <p className="product-category">{product.category}</p>
                           <h3 className="product-name">
-                            <a href="/">{product.name}</a>
+                            <Link to={"/product/"+product._id}>{product.name}</Link>
                           </h3>
                           <h4 className="product-price">
                             ${product.price} {" "}
@@ -74,14 +85,16 @@ function NewProduct(props) {
                               <span className="tooltipp">add to wishlist</span>
                             </button>
                             
+                            
                             <button className="quick-view">
                               <i className="fa fa-eye"></i>
                               <span className="tooltipp">quick view</span>
                             </button>
+                            
                           </div>
                         </div>
                         <div className="add-to-cart">
-                          <button className="add-to-cart-btn">
+                          <button onClick={()=>handleAddToCart(product)} className="add-to-cart-btn">
                             <i className="fa fa-shopping-cart"></i> add to cart
                           </button>
                         </div>

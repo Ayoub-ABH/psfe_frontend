@@ -1,27 +1,45 @@
-import React, { Component } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart, clearCart, decreaseCart, removeFromCart } from "../features/product/cartSlice";
 
-export default class Cart extends Component {
-  render() {
-    return (
-      <div className="section">
+function Cart() {
+  const { cartItems, cartTotalQuantity, cartTotalAmount } = useSelector(
+    (state) => state.cart
+  );
+  const dispatch = useDispatch()
 
-        <div className="container cart-prods">
+  const HandleDeleteFromCart = (item)=>{
+    dispatch(removeFromCart(item))
+  }
 
+  const HandleDecreaseCart = (item)=>{
+    dispatch(decreaseCart(item))
+  }
+
+  const handleAddToCart=(product)=>{
+    dispatch(addToCart(product))
+  }
+  
+
+  return (
+    <div className="section">
+      <div className="container">
+        {cartItems.map((item) => (
           <div className="row c-product">
             <div className="col-lg-2 ">
-              <p className="pro-num">1</p>
+              <p className="pro-num">{cartItems.indexOf(item) + 1}</p>
             </div>
             <div className="col-lg-2 c-product-img">
-              <img src="./img/product05.png" alt="" />
+              <img src={`/img/${item.image}`} alt={item.image} />
             </div>
             <div className="col-lg-2 c-product-body ">
-              <p>Category</p>
+              <p>{item.category}</p>
               <h4>
-                <a href="#">product name goes here</a>
+                <Link to={"/product/" + item._id}>{item.name}</Link>
               </h4>
               <h5>
-                $980.00 <del className="c-product-old-price">$990.00</del>
+                ${item.price}{" "}
+                <del className="c-product-old-price">${item.old_price}</del>
               </h5>
 
               <div className="c-product-rating">
@@ -33,109 +51,45 @@ export default class Cart extends Component {
               </div>
             </div>
             <div className="col-lg-2 c-product-btns">
-              <div >
-                <p>Quantity</p>
-                <input type="number" name="qty" class="input" defaultValue={1} min={1} required />
+              <p>Quantity</p>
+              <div>
+                <button onClick={()=> HandleDecreaseCart(item)} className="btn btn-primary">-</button>
+                <span className="product-quantity">{item.cartQuantity}</span>
+                <button onClick={()=>handleAddToCart(item)} className="btn btn-primary">+</button>
               </div>
-              <button type="button" class="btn btn-large btn-block btn-danger mrt">
+              <button
+                type="button"
+                class="btn btn-large btn-block btn-danger mrt"
+                onClick={()=> HandleDeleteFromCart(item)}
+              >
                 delete
               </button>
             </div>
           </div>
+        ))}
+      </div>
 
-
-
-          <div className="row c-product">
-            <div className="col-lg-2 ">
-              <p className="pro-num">1</p>
-            </div>
-            <div className="col-lg-2 c-product-img">
-              <img src="./img/product05.png" alt="" />
-            </div>
-            <div className="col-lg-2 c-product-body ">
-              <p>Category</p>
-              <h4>
-                <a href="#">product name goes here</a>
-              </h4>
-              <h5>
-                $980.00 <del className="c-product-old-price">$990.00</del>
-              </h5>
-
-              <div className="c-product-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-              </div>
-            </div>
-            <div className="col-lg-2 c-product-btns">
-              <div >
-                <p>Quantity</p>
-                <input type="number" name="qty" class="input" defaultValue={1} min={1} required />
-              </div>
-              <button type="button" class="btn btn-large btn-block btn-danger mrt">
-                delete
-              </button>
-            </div>
-          </div>
-
-
-          <div className="row c-product">
-            <div className="col-lg-2 ">
-              <p className="pro-num">1</p>
-            </div>
-            <div className="col-lg-2 c-product-img">
-              <img src="./img/product05.png" alt="" />
-            </div>
-            <div className="col-lg-2 c-product-body ">
-              <p>Category</p>
-              <h4>
-                <a href="#">product name goes here</a>
-              </h4>
-              <h5>
-                $980.00 <del className="c-product-old-price">$990.00</del>
-              </h5>
-
-              <div className="c-product-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-              </div>
-            </div>
-            <div className="col-lg-2 c-product-btns">
-              <div >
-                <p>Quantity</p>
-                <input type="number" name="qty" class="input" defaultValue={1} min={1} required />
-              </div>
-              <button type="button" class="btn btn-large btn-block btn-danger mrt">
-                delete
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="container cart-mounts">
-          <div className="row">
+      <div className="container cart-mounts">
+        <div className="row ">
+          <div className="col-lg-6 sum-cart">
             <div className="cart-summary">
-              <h3>3 Product(s) on the cart</h3>
-              <h4>SUBTOTAL: $2940.00</h4>
+              <h3>{cartItems.length} Product(s) on the cart</h3>
+              <h4>SUBTOTAL: ${cartTotalAmount}</h4>
             </div>
             <div className="cart-btns">
-              <Link className="btn btn-success" to="/checkout">
+              <button onClick={ ()=>{dispatch(clearCart())}} className="btn btn-danger ">CLEAR CART</button>
+              <Link className="btn btn-success nr-l" to="/checkout">
                 Checkout <i className="fa fa-arrow-circle-right" />
               </Link>
               <Link className="btn btn-warning nr-l" to="/shop">
-                continue shopping 
+                continue shopping
               </Link>
             </div>
           </div>
         </div>
-
-
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+export default Cart;

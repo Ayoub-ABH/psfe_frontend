@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-export default class ProductTabs extends Component {
-  render() {
+function ProductTabs (props) {
+  
     return (
       <div>
         {/*<!-- Product tab -->*/}
@@ -21,7 +21,7 @@ export default class ProductTabs extends Component {
               </li>
               <li>
                 <a data-toggle="tab" href="#tab3">
-                  Reviews (3)
+                  Reviews ({props.product.numReviews})
                 </a>
               </li>
             </ul>
@@ -35,14 +35,7 @@ export default class ProductTabs extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      {props.product.description}
                     </p>
                   </div>
                 </div>
@@ -55,14 +48,8 @@ export default class ProductTabs extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                    {props.product.details}
+
                     </p>
                   </div>
                 </div>
@@ -77,7 +64,7 @@ export default class ProductTabs extends Component {
                   <div className="col-md-3">
                     <div id="rating">
                       <div className="rating-avg">
-                        <span>4.5</span>
+                        <span>{props.product.rating}</span>
                         <div className="rating-stars">
                           <i className="fa fa-star" />
                           <i className="fa fa-star" />
@@ -320,5 +307,7 @@ export default class ProductTabs extends Component {
         {/*<!-- /product tab -->*/}
       </div>
     );
-  }
+  
 }
+
+export default ProductTabs;
