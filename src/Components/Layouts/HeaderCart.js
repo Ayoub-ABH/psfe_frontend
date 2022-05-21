@@ -1,10 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useEffect } from "react";
+import { getTotals } from "../../features/product/cartSlice";
 
 function HeaderCart () {
 
   const {cartItems,cartTotalQuantity,cartTotalAmount} = useSelector(state=> state.cart)
+  const dispatch = useDispatch()
 
+  useEffect(()=>{
+    dispatch(getTotals())
+  },[cartItems])
 
 
     return (
@@ -13,7 +19,7 @@ function HeaderCart () {
         <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
           <i className="fa fa-shopping-cart" />
           <span>Your Cart</span>
-          <div className="qty">{cartItems.length}</div>
+          <div className="qty">{cartTotalQuantity}</div>
         </a>
         <div className="cart-dropdown">
           <div className="cart-list">
@@ -29,7 +35,7 @@ function HeaderCart () {
                     <span>{item.name}</span>
                 </h3>
                 <h4 className="product-price">
-                  <span className="qty">{item.cartQuantity} x</span>${item.price}
+                  <span className="qty">{item.cartQuantity} x</span>Total Price ${item.price * item.cartQuantity}
                 </h4>
               </div>
               
@@ -38,7 +44,7 @@ function HeaderCart () {
             )}
           </div>
           <div className="cart-summary">
-            <small>{cartItems.length} Item(s) selected</small>
+            <small>{cartTotalQuantity} Item(s) selected</small>
             <h5>SUBTOTAL: ${cartTotalAmount}</h5>
           </div>
           <div className="cart-btns">

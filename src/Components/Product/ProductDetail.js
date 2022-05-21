@@ -1,9 +1,14 @@
-import React, { Component } from "react";
+import { addToCart } from "../../features/product/cartSlice";
+import { useDispatch } from 'react-redux';
 import Rating from "./Rating";
 
 function ProductDetail(props) {
 
+  const dispatch = useDispatch()
 
+  const handleAddToCart=(product)=>{
+    dispatch(addToCart(product))
+  }
 
     return (
       <div>
@@ -52,7 +57,7 @@ function ProductDetail(props) {
             </div>
             <div>
               <h3 className="product-price">
-                {props.product.price}<del className="product-old-price">{props.product.old_price}</del>
+                ${props.product.price}{" "}<del className="product-old-price">${props.product.old_price}</del>
               </h3>
               <span className="product-available">
                 {
@@ -79,15 +84,15 @@ function ProductDetail(props) {
               </label>
             </div> */}
             <div className="add-to-cart">
-              <div className="qty-label">
+              {/* <div className="qty-label">
                 Qty
                 <div className="input-number">
                   <input type="number" />
                   <span className="qty-up">+</span>
                   <span className="qty-down">-</span>
                 </div>
-              </div>
-              <button className="add-to-cart-btn">
+              </div> */}
+              <button onClick={()=>handleAddToCart(props.product)} className="add-to-cart-btn">
                 <i className="fa fa-shopping-cart" /> add to cart
               </button>
             </div>

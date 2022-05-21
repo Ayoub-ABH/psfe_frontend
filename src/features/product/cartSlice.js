@@ -19,10 +19,18 @@ const cartSlice = createSlice({
           );
     
         if (existingIndex >= 0) {
-            state.cartItems[existingIndex].cartQuantity +=1
-            toast.info(`Increased ${payload.name.toUpperCase()} quantity`, {
+            if(state.cartItems[existingIndex].quantity == 0 ||  state.cartItems[existingIndex].quantity == state.cartItems[existingIndex].cartQuantity )
+            {
+              toast.error(` reached the limit of quantity`, {
                 position: "bottom-left",
-            });
+              });
+            }else{
+              state.cartItems[existingIndex].cartQuantity +=1
+              toast.info(`Increased ${payload.name.toUpperCase()} quantity`, {
+                  position: "bottom-left",
+              });
+            }
+            
 
         } else {
             let tempProductItem = { ...payload, cartQuantity: 1 };
@@ -40,10 +48,10 @@ const cartSlice = createSlice({
     
           if (state.cartItems[itemIndex].cartQuantity > 1) {
             state.cartItems[itemIndex].cartQuantity -= 1;
-    
-            toast.info("Decreased product quantity", {
+            toast.info(`Decreased ${payload.name.toUpperCase()} quantity`, {
               position: "bottom-left",
             });
+            
           } else if (state.cartItems[itemIndex].cartQuantity === 1) {
             const nextCartItems = state.cartItems.filter(
               (item) => item._id !== payload._id
@@ -51,7 +59,7 @@ const cartSlice = createSlice({
     
             state.cartItems = nextCartItems;
     
-            toast.error("Product removed from cart", {
+            toast.error(`${payload.name.toUpperCase()} removed from cart`, {
               position: "bottom-left",
             });
           }
@@ -71,8 +79,25 @@ const cartSlice = createSlice({
         
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
-    getTotals(state, action) {
-      
+    getTotals(state) {
+      let { total, quantity } = state.cartItems.reduce(
+        (cartTotal, cartItem) => {
+          const { price, cartQuantity } = cartItem;
+          const itemTotal = price * cartQuantity;
+
+          cartTotal.total += itemTotal;
+          cartTotal.quantity += cartQuantity;
+
+          return cartTotal;
+        },
+        {
+          total: 0,
+          quantity: 0,
+        }
+      );
+      total = parseFloat(total.toFixed(2));
+      state.cartTotalQuantity = quantity;
+      state.cartTotalAmount = total;
     },
     clearCart(state) {
         state.cartItems = [];

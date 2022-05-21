@@ -30,7 +30,7 @@ function App() {
 	}) 
 
   const {isLoading } = useSelector(
-    (state) =>state.products
+    (state) =>state.reviews
   )
   
 
@@ -45,11 +45,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop/>} />
             <Route path="/checkout" element={<Checkout/>} />
-            <Route path="/product/:id" element={<Product/>} />
+            <Route path="/product/:id"  element={<Product/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/cart" element={<Cart/>} />
             <Route path="/wishlist" element={<WishList/>} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         
           <Footer/>

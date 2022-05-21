@@ -1,12 +1,17 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart, clearCart, decreaseCart, removeFromCart } from "../features/product/cartSlice";
+import { addToCart, clearCart, decreaseCart, getTotals, removeFromCart } from "../features/product/cartSlice";
 
 function Cart() {
   const { cartItems, cartTotalQuantity, cartTotalAmount } = useSelector(
     (state) => state.cart
   );
   const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(getTotals())
+  },[cartItems])
 
   const HandleDeleteFromCart = (item)=>{
     dispatch(removeFromCart(item))
@@ -38,8 +43,7 @@ function Cart() {
                 <Link to={"/product/" + item._id}>{item.name}</Link>
               </h4>
               <h5>
-                ${item.price}{" "}
-                <del className="c-product-old-price">${item.old_price}</del>
+                Total Price ${item.price * item.cartQuantity}
               </h5>
 
               <div className="c-product-rating">
@@ -73,7 +77,7 @@ function Cart() {
         <div className="row ">
           <div className="col-lg-6 sum-cart">
             <div className="cart-summary">
-              <h3>{cartItems.length} Product(s) on the cart</h3>
+              <h3>{cartTotalQuantity} Product(s) on the cart</h3>
               <h4>SUBTOTAL: ${cartTotalAmount}</h4>
             </div>
             <div className="cart-btns">

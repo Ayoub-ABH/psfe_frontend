@@ -1,10 +1,15 @@
-import React from "react";
+import { addToCart } from "../../features/product/cartSlice";
+import { useDispatch } from 'react-redux';
 import Rating from "../Product/Rating";
 import {Link} from 'react-router-dom'
 
 function Store(props) {
 
-  
+  const dispatch = useDispatch()
+
+  const handleAddToCart=(product)=>{
+    dispatch(addToCart(product))
+  }
 
 
     return (
@@ -54,7 +59,7 @@ function Store(props) {
                             </div>
                           </div>
                           <div className="add-to-cart">
-                            <button className="add-to-cart-btn">
+                            <button onClick={()=>handleAddToCart(product)} className="add-to-cart-btn">
                               <i className="fa fa-shopping-cart"></i> add to cart
                             </button>
                           </div>
