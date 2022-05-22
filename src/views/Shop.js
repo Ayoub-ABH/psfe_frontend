@@ -31,7 +31,6 @@ function Shop() {
     if (e.target.name == "page") query.page = e.target.value;
     if (e.target.name == "reset") query = {};
 
-    console.log(query);
 
     dispatch(getSomeProducts(query));
   };

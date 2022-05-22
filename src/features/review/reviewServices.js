@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:5000/api/review/'
 
 
 
-// get newProducts
+// add a product review
 const addProductReview = async (data) => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if(userInfo === null){
@@ -22,18 +22,25 @@ const addProductReview = async (data) => {
     }
 }
 
-// get newProducts
-const getAllProductReviews = async (idProduct) => {
-  const reviews = await axios.get(API_URL+'add',{params:{product:idProduct}})
+// get  all product review
+const getAllProductReviews = async (query) => {
+  const reviews = await axios.get(API_URL+'all',{params:query})
   return reviews.data;
   
+}
+
+//delete a product review
+const deleteProductReview = async (idReview) => {
+  const reviews = await axios.delete(API_URL+'delete',{params:{_id:idReview}})
+  return reviews.data;
 }
 
 
 
 const reviewService = {
   addProductReview,
-  getAllProductReviews
+  getAllProductReviews,
+  deleteProductReview
 }
 
 export default reviewService;

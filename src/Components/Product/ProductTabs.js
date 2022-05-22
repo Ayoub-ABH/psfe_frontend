@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
-import { addReview, reset } from '../../features/review/reviewSlice';
+import { addReview, getReviews, reset } from '../../features/review/reviewSlice';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import Review from './Review';
 
 
 
@@ -32,16 +33,17 @@ function ProductTabs(props) {
     if (isError) {
       toast.error(message);
     }
-    if(isSuccess){
-      toast.success(message);
-    }
-    dispatch(reset())
 
-  }, [message]);
+    dispatch(getReviews({idProduct:id}))
+    
+    dispatch(reset())
+  }, [ message]);
+  
 
   const handleAddReview = (e) => {
     e.preventDefault();
     dispatch(addReview(data))
+    dispatch(reset())
   }
 
   return (
@@ -190,89 +192,8 @@ function ProductTabs(props) {
                 {/*<!-- /Rating -->*/}
 
                 {/*<!-- Reviews -->*/}
-                <div className="col-md-6">
-                  <div id="reviews">
-                    <ul className="reviews">
-                      <li>
-                        <div className="review-heading">
-                          <h5 className="name">John</h5>
-                          <p className="date">27 DEC 2018, 8:0 PM</p>
-                          <div className="review-rating">
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star-o empty" />
-                          </div>
-                        </div>
-                        <div className="review-body">
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="review-heading">
-                          <h5 className="name">John</h5>
-                          <p className="date">27 DEC 2018, 8:0 PM</p>
-                          <div className="review-rating">
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star-o empty" />
-                          </div>
-                        </div>
-                        <div className="review-body">
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="review-heading">
-                          <h5 className="name">John</h5>
-                          <p className="date">27 DEC 2018, 8:0 PM</p>
-                          <div className="review-rating">
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star-o empty" />
-                          </div>
-                        </div>
-                        <div className="review-body">
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua
-                          </p>
-                        </div>
-                      </li>
-                    </ul>
-                    <ul className="reviews-pagination">
-                      <li className="active">1</li>
-                      <li>
-                        <a href="#">2</a>
-                      </li>
-                      <li>
-                        <a href="#">3</a>
-                      </li>
-                      <li>
-                        <a href="#">4</a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fa fa-angle-right" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                 
+                 <Review />
 
                 {/*<!-- /Reviews -->*/}
 

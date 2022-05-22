@@ -138,6 +138,16 @@
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
 }
+.input-page-review{
+    display: inline-block;
+    width: 34px;
+    height: 35px;
+    line-height: 33px;
+    text-align: center;
+    background-color: #FFF;
+    border: 1px solid #E4E7ED;
+    transition: 0.2s all;
+}
 .in-active{
     color: white;
     background-color: #d10024;
