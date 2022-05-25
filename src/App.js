@@ -16,6 +16,8 @@ import WishList from "./views/WishList";
 import BreadCrumb from "./Components/Layouts/BreadCrumb";
 import {  useSelector } from 'react-redux';
 import Spinner from './Components/Layouts/Spinner';
+import NotFound from "./Components/Layouts/NotFound";
+import CheckoutSuccess from "./Components/Order/CheckoutSuccess";
 
 
 function App() {
@@ -30,14 +32,14 @@ function App() {
 	}) 
 
   const {isLoading } = useSelector(
-    (state) =>state.reviews
+    (state) =>state.orders
   )
   
 
   return (
   <div className="App">
       <BrowserRouter>
-          {isLoading? <Spinner/> : <></> }  
+          {isLoading? <Spinner/>  : <></> } 
           <Header />
           <BreadCrumb/>
 
@@ -50,7 +52,9 @@ function App() {
             <Route path="/register" element={<Register/>} />
             <Route path="/cart" element={<Cart/>} />
             <Route path="/wishlist" element={<WishList/>} />
-            {/* <Route path="*" element={<NotFound />} /> */}
+            <Route path="/checkout" element={<Checkout/>} />
+            <Route path="/checkout-success" element={<CheckoutSuccess/>} />
+            <Route path="*" element={<NotFound/>} />
           </Routes>
         
           <Footer/>

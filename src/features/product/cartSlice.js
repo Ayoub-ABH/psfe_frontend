@@ -17,9 +17,10 @@ const cartSlice = createSlice({
         const existingIndex = state.cartItems.findIndex(
             (item) => item._id === payload._id
           );
-    
+
         if (existingIndex >= 0) {
-            if(state.cartItems[existingIndex].quantity == 0 ||  state.cartItems[existingIndex].quantity == state.cartItems[existingIndex].cartQuantity )
+           
+            if(payload.quantity <= 0 ||  payload.quantity === payload.cartQuantity )
             {
               toast.error(` reached the limit of quantity`, {
                 position: "bottom-left",
@@ -32,12 +33,19 @@ const cartSlice = createSlice({
             }
             
 
-        } else {
+        } else {          
+          if(payload.quantity <= 0)
+          {
+            toast.error(` reached the limit of quantity`, {
+              position: "bottom-left",
+            });
+          }else{
             let tempProductItem = { ...payload, cartQuantity: 1 };
             state.cartItems.push(tempProductItem);
             toast.success(`${payload.name.toUpperCase()} added to Cart`, {
                 position: "bottom-left",
             });
+          }
         }
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },

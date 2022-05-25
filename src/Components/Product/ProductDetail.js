@@ -61,7 +61,7 @@ function ProductDetail(props) {
               </h3>
               <span className="product-available">
                 {
-                  props.product.quantity > 0 ? "In Stock" : "Out of Stock"
+                  props.product.quantity <= 0 ? "Out Of Stock" : "In Stock"
                 }
                 
               </span>

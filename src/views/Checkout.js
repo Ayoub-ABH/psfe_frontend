@@ -1,45 +1,83 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { addOrder, reset } from "../features/order/orderSlice";
 
-function Checkout()  {
-	const { cartItems, cartTotalQuantity, cartTotalAmount } = useSelector(
-		(state) => state.cart
-	  );
-    return (
-      <div>
-        {/*<!-- SECTION -->*/}
-        <div className="section">
-          {/*<!-- container -->*/}
-          <div className="container">
-            <div className="row">
-              <div className="col-md-7">
+function Checkout() {
+
+  const { cartItems, cartTotalQuantity, cartTotalAmount } = useSelector(
+    (state) => state.cart
+  );
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.orders
+  );
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  
+  const [shippingAddress, setShippingAddress]=useState({
+      telephone: "",
+      address: "",
+      city: "",
+      postalCode: "",
+      country: ""
+  })
+  const [order, setOrder] = useState({
+    orderItems: cartItems,
+    shippingAddress: shippingAddress,
+    paymentMethod: "",
+    totalPrice: cartTotalAmount
+  })
+
+  const handleInput = (e) => {
+    setShippingAddress({
+      ...shippingAddress,
+      [e.target.name]:e.target.value
+    })
+    setOrder({
+      ...order,
+      shippingAddress: {
+        ...shippingAddress,
+        [e.target.name]:e.target.value
+      },
+      totalPrice: cartTotalAmount
+    }) 
+  }
+
+  const handleAddorder = (e)=>{
+    e.preventDefault()
+    dispatch(addOrder(order))
+    
+  }
+
+  useEffect(()=>{
+    if(isError)
+    toast.error(message)
+
+    if(isSuccess) 
+    navigate("/checkout-success")
+
+    dispatch(reset())
+  },[message,isSuccess])
+
+  return (
+    <div>
+      {/*<!-- SECTION -->*/}
+      <div className="section">
+        {/*<!-- container -->*/}
+        <div className="container">
+
+        
+
+          <div className="row">
+
+            <form onSubmit={handleAddorder}>
+
+            <div className="col-md-7">
                 {/*<!-- Billing Details -->*/}
                 <div className="billing-details">
                   <div className="section-title">
-                    <h3 className="title">Billing address</h3>
-                  </div>
-                  <div className="form-group">
-                    <input
-                      className="input"
-                      type="text"
-                      name="first-name"
-                      placeholder="First Name"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      className="input"
-                      type="text"
-                      name="last-name"
-                      placeholder="Last Name"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      className="input"
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                    />
+                    <h3 className="title">shipping Address </h3>
                   </div>
                   <div className="form-group">
                     <input
@@ -47,6 +85,7 @@ function Checkout()  {
                       type="text"
                       name="address"
                       placeholder="Address"
+                      onChange={handleInput}
                     />
                   </div>
                   <div className="form-group">
@@ -55,6 +94,8 @@ function Checkout()  {
                       type="text"
                       name="city"
                       placeholder="City"
+                      onChange={handleInput}
+
                     />
                   </div>
                   <div className="form-group">
@@ -63,185 +104,77 @@ function Checkout()  {
                       type="text"
                       name="country"
                       placeholder="Country"
+                      onChange={handleInput}
+
                     />
                   </div>
                   <div className="form-group">
                     <input
                       className="input"
                       type="text"
-                      name="zip-code"
+                      name="postalCode"
                       placeholder="ZIP Code"
+                      onChange={handleInput}
+
                     />
                   </div>
                   <div className="form-group">
                     <input
                       className="input"
                       type="tel"
-                      name="tel"
-                      placeholder="Telephone"
+                      name="telephone"
+                      placeholder="telephone"
+                      onChange={handleInput}
                     />
                   </div>
-                  <div className="form-group">
-                    <div className="input-checkbox">
-                      <input type="checkbox" id="create-account" />
-                      <label htmlFor="create-account">
-                        <span />
-                        Create Account?
-                      </label>
-                      <div className="caption">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit, sed do eiusmod tempor incididunt.
-                        </p>
-                        <input
-                          className="input"
-                          type="password"
-                          name="password"
-                          placeholder="Enter Your Password"
-                        />
-                      </div>
-                    </div>
-                  </div>
                 </div>
-
                 {/*<!-- /Billing Details -->*/}
+            </div>
+            
 
-                {/*<!-- Shiping Details -->*/}
-                <div className="shiping-details">
-                  <div className="section-title">
-                    <h3 className="title">Shiping address</h3>
-                  </div>
-                  <div className="input-checkbox">
-                    <input type="checkbox" id="shiping-address" />
-                    <label htmlFor="shiping-address">
-                      <span />
-                      Ship to a diffrent address?
-                    </label>
-                    <div className="caption">
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="text"
-                          name="first-name"
-                          placeholder="First Name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="text"
-                          name="last-name"
-                          placeholder="Last Name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="email"
-                          name="email"
-                          placeholder="Email"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="text"
-                          name="address"
-                          placeholder="Address"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="text"
-                          name="city"
-                          placeholder="City"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="text"
-                          name="country"
-                          placeholder="Country"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="text"
-                          name="zip-code"
-                          placeholder="ZIP Code"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          className="input"
-                          type="tel"
-                          name="tel"
-                          placeholder="Telephone"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                {/*<!-- /Shiping Details -->*/}
-
-                {/*<!-- Order notes -->*/}
-                <div className="order-notes">
-                  <textarea
-                    className="input"
-                    placeholder="Order Notes"
-                    defaultValue={""}
-                  />
-                </div>
-
-                {/*<!-- /Order notes -->*/}
+            {/*<!-- Order Details -->*/}
+            <div className="col-md-5 order-details">
+              <div className="section-title text-center">
+                <h3 className="title">Your Order</h3>
               </div>
+              <div className="order-summary">
 
-              {/*<!-- Order Details -->*/}
-              <div className="col-md-5 order-details">
-                <div className="section-title text-center">
-                  <h3 className="title">Your Order</h3>
-                </div>
-                <div className="order-summary">
-
-                  <div className="order-col">
-                    <div>
-                      <strong>PRODUCT</strong>
-                    </div>
-                    <div>
-                      <strong>TOTAL</strong>
-                    </div>
+                <div className="order-col">
+                  <div>
+                    <strong>PRODUCT</strong>
                   </div>
-                  <div className="order-products">
-					{cartItems.map((item)=>
-					
-						<div className="order-col">
-						<div>{item.cartQuantity}x {item.name}</div>
-						<div>${item.price * item.cartQuantity}</div>
-						</div>
-					
-					)}
-
-                  </div>
-                  <div className="order-col">
-                    <div>Shiping</div>
-                    <div>
-                      <strong>FREE</strong>
-                    </div>
-                  </div>
-                  <div className="order-col">
-                    <div>
-                      <strong>TOTAL</strong>
-                    </div>
-                    <div>
-                      <strong className="order-total">${cartTotalAmount}</strong>
-                    </div>
+                  <div>
+                    <strong>TOTAL</strong>
                   </div>
                 </div>
-                <div className="payment-method">
+                <div className="order-products">
+                  {cartItems.map((item) =>
+
+                    <div className="order-col">
+                      <div>{item.cartQuantity}x {item.name}</div>
+                      <div>${item.price * item.cartQuantity}</div>
+                    </div>
+
+                  )}
+
+                </div>
+                <div className="order-col">
+                  <div>Shiping</div>
+                  <div>
+                    <strong>FREE</strong>
+                  </div>
+                </div>
+                <div className="order-col">
+                  <div>
+                    <strong>TOTAL</strong>
+                  </div>
+                  <div>
+                    <strong className="order-total">${cartTotalAmount}</strong>
+                  </div>
+                </div>
+              </div>
+              {/* <div className="payment-method">
                   <div className="input-radio">
                     <input type="radio" name="payment" id="payment-1" />
                     <label htmlFor="payment-1">
@@ -292,20 +225,23 @@ function Checkout()  {
                     I've read and accept the{" "}
                     <a href="#">terms &amp; conditions</a>
                   </label>
-                </div>
-                <a href="#" className="primary-btn order-submit">
-                  Place order
-                </a>
-              </div>
-
-              {/*<!-- /Order Details -->*/}
+                </div> */}
+              <button type="submit" className="primary-btn order-submit">
+                Place order
+              </button>
             </div>
-          </div>
+            {/*<!-- /Order Details -->*/}
+
+            </form>
+
         </div>
-        {/*<!-- /SECTION -->*/}
+        
       </div>
-    );
-  
+    </div>
+        {/*<!-- /SECTION -->*/ }
+  </div >
+);
+
 }
 
 

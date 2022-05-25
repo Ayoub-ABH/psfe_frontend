@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import PayButton from "../Components/Order/PayButton";
 import { addToCart, clearCart, decreaseCart, getTotals, removeFromCart } from "../features/product/cartSlice";
 
 function Cart() {
@@ -82,8 +83,9 @@ function Cart() {
             </div>
             <div className="cart-btns">
               <button onClick={ ()=>{dispatch(clearCart())}} className="btn btn-danger ">CLEAR CART</button>
+              {/* <PayButton  cartItems={cartItems} /> */}
               <Link className="btn btn-success nr-l" to="/checkout">
-                Checkout <i className="fa fa-arrow-circle-right" />
+                checkout<i className="fa fa-arrow-circle-right" />
               </Link>
               <Link className="btn btn-warning nr-l" to="/shop">
                 continue shopping
