@@ -50,9 +50,9 @@ export const getReviews = createAsyncThunk(
 //get Product reviews
 export const deleteReview = createAsyncThunk(
   "review/delete",
-  async (idReview,thunkAPI) => {
+  async (Review,thunkAPI) => {
     try {
-      return await reviewService.deleteProductReview(idReview);
+      return await reviewService.deleteProductReview(Review);
     } catch (error) {
       const message =
         (error.response &&

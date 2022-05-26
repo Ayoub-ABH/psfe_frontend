@@ -55,11 +55,11 @@ function NewProduct(props) {
             <div className="row">
               <div className="products-tabs">
                 {/*<!-- tab -->*/}
-                <div id={`tab${props.slick}`} className="tab-pane active">
-                  <div className="products-slick" data-nav={`#slick-nav-${props.slick}`}>
+                <div  className="tab-pane active">
+                  <div className="products-slick" >
                     {/*<!-- product -->*/}
                     {props.products.map((product) => (
-                      <div className="product" key={product._id}>
+                      <div className="product col-lg-3 col-md-6 col-xm-12 product-new"  key={product._id}>
                         <div className="product-img">
                           <img src={`/img/${product.image}`} alt={`${product.image}`} />
                           {/* <div className="product-label">
@@ -102,7 +102,6 @@ function NewProduct(props) {
                     ))}
                     {/*!--product--*/}
                   </div>
-                  <div id={`slick-nav-${props.slick}`} className="products-slick-nav"></div>
                 </div>
                 {/*<!-- /tab -->*/}
               </div>

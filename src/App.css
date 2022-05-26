@@ -77,6 +77,16 @@
     padding-left: 50px;
 }
 
+.product-new{
+    width:23%;
+    margin:15px 10px;
+    padding: 0px;
+}
+.row-product{
+    margin-right: 3px;
+    margin-left: 1px;
+}
+
 /*product*/
 
 

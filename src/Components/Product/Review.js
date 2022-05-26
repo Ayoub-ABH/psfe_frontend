@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
+import { getOneProduct } from '../../features/product/productSlice';
 import { deleteReview, getReviews, reset } from '../../features/review/reviewSlice';
 
 function Review() {
@@ -11,13 +12,17 @@ function Review() {
   const {id} = useParams()
 
 
-  const HandleDeleteReview = (idReview)=>{
-    dispatch(deleteReview(idReview))
+  const HandleDeleteReview = (Review)=>{
+    dispatch(deleteReview(Review))
   }
 
  const HandlePageClick = (e)=>{
+  
    dispatch(getReviews({idProduct:id,page:e.target.value}))
    
+   let page=document.querySelector(".in-active")
+   page.classList.remove('in-active');
+   e.target.classList.add('in-active');
  }
   
 
@@ -27,7 +32,7 @@ function Review() {
                   <div id="reviews">
                     <ul className="reviews">
 
-                      {isSuccess? (productReviews.docs.map((review)=>
+                      {isSuccess  && productReviews.docs ? (productReviews.docs.map((review)=>
                       
                       <li style={{display:"flex",justifyContent:"space-between"}}>
                         <div className="review-heading">
@@ -49,7 +54,7 @@ function Review() {
                         </div> 
                         { (user && user._id === review.user) ? (
                           <div >
-                          <button type="button" onClick={()=> HandleDeleteReview(review._id)} style={{padding:"1px 5px"}} class="btn btn-danger">delete</button>
+                          <button type="button" onClick={()=> HandleDeleteReview({idReview:review._id,idProduct:id})} style={{padding:"1px 5px"}} class="btn btn-danger">delete</button>
                         </div>
                         ):(
                           < >

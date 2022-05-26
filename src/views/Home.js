@@ -86,7 +86,7 @@ const  Home  =() => {
 
 		{/* !-- /SECTION New Product-->*/}
 
-		{ isSuccess  ? (<NewProduct  products={products.new} slick={1}/>) : (<></>)}
+		{ isSuccess  ? (<NewProduct  products={products.new} />) : (<></>)}
 		
 		{/* !-- /SECTION New Product-->*/}
 
@@ -135,7 +135,7 @@ const  Home  =() => {
 		{/*<!-- /HOT DEAL SECTION -->*/}
 
 		{/* !-- /SECTION New Product-->*/}
-		{ isSuccess  ? (<NewProduct  products={products.new} slick={2}/>) : (<></>)}
+		{ isSuccess  ? (<NewProduct  products={products.new} />) : (<></>)}
 		
 		{/* !-- /SECTION New Product-->*/}
 

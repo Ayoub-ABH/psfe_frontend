@@ -28,7 +28,16 @@ function Shop() {
     if (e.target.name == "price_min") query.min_price = e.target.value;
     if (e.target.name == "price_max") query.max_price = e.target.value;
     if (e.target.name == "sortBy") query.sortBy = e.target.value;
-    if (e.target.name == "page") query.page = e.target.value;
+    if (e.target.name == "page") {
+      query.page = e.target.value;
+      
+      let page=document.querySelector(".in-active")
+      page.classList.remove('in-active');
+
+      e.target.classList.add('in-active');
+
+      
+    }
     if (e.target.name == "reset") query = {};
 
 

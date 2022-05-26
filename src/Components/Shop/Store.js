@@ -18,13 +18,13 @@ function Store(props) {
           
 
           {/*<!-- store products --> */}
-          <div className="row">
+          <div className="row row-product">
 
 
 
             {/* <!-- product -->*/}
             {props.products.docs.map((product)=>
-              <>
+            
                     <div className="col-md-4 col-sm-6" key={product._id}>
                     <div className="product" >
                           <div className="product-img">
@@ -66,8 +66,7 @@ function Store(props) {
                         </div>
                   </div>
 
-                  <div className="clearfix visible-sm visible-xs"></div>
-                  </>
+                  
       
               )}
 

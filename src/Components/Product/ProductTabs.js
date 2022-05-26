@@ -4,6 +4,7 @@ import { addReview, getReviews, reset } from '../../features/review/reviewSlice'
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import Review from './Review';
+import { getOneProduct } from '../../features/product/productSlice';
 
 
 
@@ -38,12 +39,19 @@ function ProductTabs(props) {
     
     dispatch(reset())
   }, [ message]);
+
+  useEffect(() => {
+
+    dispatch(getOneProduct(id))
+    dispatch(reset())
+
+   }, [message]);
   
 
   const handleAddReview = (e) => {
     e.preventDefault();
     dispatch(addReview(data))
-    dispatch(reset())
+    //dispatch(reset())
   }
 
   return (
@@ -119,7 +127,7 @@ function ProductTabs(props) {
 
                       </div>
                     </div>
-                    <ul className="rating">
+                    {/* <ul className="rating">
                       <li>
                         <div className="rating-stars">
                           <i className="fa fa-star" />
@@ -185,7 +193,7 @@ function ProductTabs(props) {
                         </div>
                         <span className="sum">0</span>
                       </li>
-                    </ul>
+                    </ul> */}
                   </div>
                 </div>
 

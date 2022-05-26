@@ -22,15 +22,6 @@ import CheckoutSuccess from "./Components/Order/CheckoutSuccess";
 
 function App() {
 
-  useEffect(() =>{
-		
-		const script = document.createElement("script");
-		script.src = "./js/main.js";
-    script.async=true;
-		document.body.appendChild(script);
-
-	}) 
-
   const {isLoading } = useSelector(
     (state) =>state.orders
   )

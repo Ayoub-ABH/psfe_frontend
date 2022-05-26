@@ -30,8 +30,8 @@ const getAllProductReviews = async (query) => {
 }
 
 //delete a product review
-const deleteProductReview = async (idReview) => {
-  const reviews = await axios.delete(API_URL+'delete',{params:{_id:idReview}})
+const deleteProductReview = async (Review) => {
+  const reviews = await axios.delete(API_URL+'delete',{params:Review})
   return reviews.data;
 }
 
