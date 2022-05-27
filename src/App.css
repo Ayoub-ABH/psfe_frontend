@@ -202,25 +202,77 @@
 
 
 /*Admin*/
-.navs{
+.admin-Layout{
+    display: flex;
+
+}
+.admin-Layout .row{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.admin-side-bar{
+    height: 100vh;
     background-color: #15161D;
-    padding: 10px;
-    border-radius: 2px;
-    height: 86vh;
+    width: 18%;
+    border-right: 2px solid #D10024;
+    position: fixed;
+}
+.admin-content{
+    /* height khas t7ayed 
+    height: 100vh;*/
+    background-color: #eee;
+    width: 82%;
+    margin-left:  18%;
+}
+.admin-logo{
+    margin-left: 20px;
+    margin-bottom: 17px;
+}
+
+.admin-navs >ul  >li {
+    margin: 10px;    
+}
+.admin-navs >ul  >li >a{
+    color: white;
+}
+.admin-navs >ul >li >a:hover{
+    color: #D10024;
+    background-color: #FFF;
+}
+.admin-search form .input{
+    width: calc(100% - 260px);
+    margin: 17px;
+    border-radius: 17px;
+}
+.admin-account{
+    margin-top: 18px;
+    margin-left: 218px;
 }
 #admine-header{
     padding-top: 0px;
     padding-bottom: 0px;
     background-color: #15161D;
-}
-.admin-nav-links >li >a{
-    color: white;
-}
-.admin-nav-links >li >a:hover{
-    color: #D10024;
-    background-color: #FFF;
+    border-bottom: 2px solid #d10024;
+    position: fixed;
+    width: 82%;
 }
 .admin-link-active{
     background-color: #d10024;
+}
+
+.mr-l-btn{
+    float: right;
+}
+.mt-80{
+    margin-top: 80px;
+}
+
+.admin-footer{
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    background-color: slategrey;
+    color: white;
+    width: 82%;
 }
 /*Admin*/

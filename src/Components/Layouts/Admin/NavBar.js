@@ -8,30 +8,15 @@ function NavBar() {
         <div >
             {/*<!-- MAIN HEADER -->*/}
       <div id="admine-header">
-        <div className="container">
-          <div className="row">
-            {/*<!-- LOGO -->*/}
-            <div className="col-md-3">
-              <div className="header-logo">
-                <Link to="/admin" className="logo">
-                    <img src="./img/logo.png" alt />
-                </Link>
-              </div>
-            </div>
-
-            {/*<!-- /LOGO -->*/}
+        <div >
+          <div className='row'>
+      
 
             {/*<!-- SEARCH BAR -->*/}
             <div className="col-md-6">
-              <div className="header-search">
+              <div className="admin-search">
                 <form >
-                  <select className="input-select" name="category">
-                  <option >allCategories</option>
-                    <option >product </option>
-                    
-                  </select>
-                  <input className="input" name="name"  placeholder="Search here" />
-                  <button className="search-btn">Search</button>
+                  <input className="input" name="search"  placeholder="Search here" />
                 </form>
               </div>
             </div>
@@ -40,7 +25,7 @@ function NavBar() {
 
             {/*<!-- ACCOUNT -->*/}
             <div className="col-md-3 clearfix">
-              <div className="header-ctn">
+              <div className="admin-account">
 
               <div class="dropdown">
                   <button

@@ -1,25 +1,21 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import SideBar from './SideBar'
 import NavBar from './NavBar'
-import Navs from './Navs'
+import AdminFooter from './AdminFooter'
 
 function AdminLayouts() {
   return (
-    <>
-        <NavBar/>
-
-        <div className="row">
-        <div className="col-lg-2 col-md-2 col-sm-2 navs">
-            <Navs/>
+    <div className='admin-Layout'> 
+        <div className="admin-side-bar">
+          <SideBar/>
         </div>
-        <div className="col-lg-6 col-md-6  col-sm-6">
-            <Outlet/>
+        <div className="admin-content">
+          <NavBar/>
+          <Outlet/>
+          <AdminFooter/>
         </div>
-        </div>
-        
-        
-        
-    </>
+    </div>
   )
 }
 
