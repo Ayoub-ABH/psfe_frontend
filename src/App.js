@@ -23,6 +23,8 @@ import Users from "./views/Admin/Users";
 import Products from "./views/Admin/Products";
 import Orders from "./views/Admin/Orders";
 import Reviews from "./views/Admin/Reviews";
+import AddUser from "./Components/Admin/AddUser";
+import UpdateUser from "./Components/Admin/UpdateUser";
 
 
 function App() {
@@ -56,7 +58,12 @@ function App() {
 
             <Route element={<AdminLayouts/>}>
               <Route path="/admin" element={<Admin/>}/>
+
               <Route path="/admin/users" element={<Users/>}/>
+              <Route  path="/admin/users/add" element={<AddUser/>}/>
+              <Route  path="/admin/users/update/:id" element={<UpdateUser/>}/>
+                 
+
               <Route path="/admin/products" element={<Products/>}/>
               <Route path="/admin/orders" element={<Orders/>}/>
               <Route path="/admin/reviews" element={<Reviews/>}/>

@@ -13,7 +13,7 @@ function AdminLayouts() {
         <div className="admin-content">
           <NavBar/>
           <Outlet/>
-          <AdminFooter/>
+          {/* <AdminFooter/> */}
         </div>
     </div>
   )

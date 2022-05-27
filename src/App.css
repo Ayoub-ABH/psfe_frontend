@@ -218,8 +218,7 @@
     position: fixed;
 }
 .admin-content{
-    /* height khas t7ayed 
-    height: 100vh;*/
+    min-height: 100vh;
     background-color: #eee;
     width: 82%;
     margin-left:  18%;
@@ -267,6 +266,15 @@
     margin-top: 80px;
 }
 
+.w-25{
+    width: 25%;
+}
+
+.admin-data-table{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .admin-footer{
     position: absolute;
     bottom: 0;
@@ -274,5 +282,17 @@
     background-color: slategrey;
     color: white;
     width: 82%;
+}
+.admin-user-form{
+    margin: 30px;
+}
+.admin-user-form label{
+    color: #d10024;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.admin-user-image{
+    border-radius: 50%;
 }
 /*Admin*/
