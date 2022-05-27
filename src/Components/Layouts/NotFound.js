@@ -4,7 +4,13 @@ function NotFound() {
   return (
     <div>
         
-        ERROR 404 PAGE NOT FOUND
+        <div className='NotFound-number'>
+          404
+        </div>  
+        
+        <div className='NotFound-text'>
+          PAGE NOT FOUND
+        </div> 
         
     </div>
   )

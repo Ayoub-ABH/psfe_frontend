@@ -44,6 +44,16 @@ function Header() {
     navigate('/shop')
   }
 
+
+  const handleMenuClick = (e)=>{
+    e.preventDefault();
+    const menu = document.querySelector('#responsive-nav')
+    if(menu.className == 'active')
+     menu.className=''
+     else
+     menu.className = 'active'
+  }
+
   return (
     <header>
       {/*<!-- TOP HEADER -->*/}
@@ -96,7 +106,7 @@ function Header() {
                       </li>
                     ) : (
                       <li>
-                        <Link to="/Admin" className="drd-links-1">
+                        <Link to="/admin" className="drd-links-1">
                           <i class="fa fa-id-card" aria-hidden="true" />
                           Admin
                         </Link>
@@ -175,7 +185,7 @@ function Header() {
 
                 {/*<!-- Menu Toogle -->*/}
                 <div className="menu-toggle">
-                  <a href="#">
+                  <a onClick={handleMenuClick} href="#">
                     <i className="fa fa-bars" />
                     <span>Menu</span>
                   </a>

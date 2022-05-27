@@ -18,6 +18,10 @@ import {  useSelector } from 'react-redux';
 import Spinner from './Components/Layouts/Spinner';
 import NotFound from "./Components/Layouts/NotFound";
 import CheckoutSuccess from "./Components/Order/CheckoutSuccess";
+import Profile from "./views/Profile";
+import UserLayouts from "./Components/Layouts/UserLayouts";
+import AdminLayouts from "./Components/Layouts/Admin/AdminLayouts";
+import Admin from "./views/Admin/Admin";
 
 
 function App() {
@@ -31,24 +35,29 @@ function App() {
   <div className="App">
       <BrowserRouter>
           {isLoading? <Spinner/>  : <></> } 
-          <Header />
-          <BreadCrumb/>
+          
 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop/>} />
-            <Route path="/checkout" element={<Checkout/>} />
-            <Route path="/product/:id"  element={<Product/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/cart" element={<Cart/>} />
-            <Route path="/wishlist" element={<WishList/>} />
-            <Route path="/checkout" element={<Checkout/>} />
-            <Route path="/checkout-success" element={<CheckoutSuccess/>} />
-            <Route path="*" element={<NotFound/>} />
+            <Route element={<UserLayouts/>}>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop/>} />
+              <Route path="/checkout" element={<Checkout/>} />
+              <Route path="/product/:id"  element={<Product/>} />
+              <Route path="/login" element={<Login/>} />
+              <Route path="/register" element={<Register/>} />
+              <Route path="/cart" element={<Cart/>} />
+              <Route path="/wishlist" element={<WishList/>} />
+              <Route path="/checkout" element={<Checkout/>} />
+              <Route path="/checkout-success" element={<CheckoutSuccess/>} />
+              <Route path="/profile" element={<Profile/>} />
+              <Route path="*" element={<NotFound/>} />
+            </Route>
+
+            <Route element={<AdminLayouts/>}>
+              <Route path="/admin" element={<Admin/>}/>
+            </Route>
           </Routes>
         
-          <Footer/>
       </BrowserRouter>
       <ToastContainer />
       </div>

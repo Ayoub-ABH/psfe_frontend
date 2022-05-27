@@ -163,3 +163,64 @@
     background-color: #d10024;
 }
 /**/
+
+
+/**/
+.NotFound-number{
+        color: #d10024;
+        text-align: center;
+        font-weight: bold;
+        font-size: 100px;
+        margin-top: 92px;
+}
+.NotFound-text{
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 92px;
+}
+/**/
+
+
+
+/*profile*/
+.profile-image{
+    background-color: #d10024;
+}
+.color-red{
+    color: #D10024;
+}
+.profile-detail{
+    margin-top: 10px;
+}
+
+.boxing{
+    box-shadow: 0px 0px 0px 0px #e4e7ed, 0px 0px 0px 1px #e4e7ed;
+    padding: 10px;
+}
+/*profile*/
+
+
+/*Admin*/
+.navs{
+    background-color: #15161D;
+    padding: 10px;
+    border-radius: 2px;
+    height: 86vh;
+}
+#admine-header{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: #15161D;
+}
+.admin-nav-links >li >a{
+    color: white;
+}
+.admin-nav-links >li >a:hover{
+    color: #D10024;
+    background-color: #FFF;
+}
+.admin-link-active{
+    background-color: #d10024;
+}
+/*Admin*/

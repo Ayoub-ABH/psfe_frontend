@@ -12,17 +12,17 @@ function Navigation() {
                 {/*<!-- NAV -->*/} 
                     <ul class="main-nav nav navbar-nav">
                         <li className='active'><Link to="/">Home</Link></li>
-                        <li><Link to="shop">Shop</Link></li>
-                        <li><Link to="contact">Contact</Link></li>
-                        <li><Link to="About">About</Link></li>
+                        <li><Link to="/shop">Shop</Link></li>
+                        <li><Link to="/contact">Contact</Link></li>
+                        <li><Link to="/about">About</Link></li>
 
 
                         {user ? 
                             <></>
                             :
                             <>
-                                <li><Link to="login">Login</Link></li>
-                                <li><Link to="register">Register</Link></li>
+                                <li><Link to="/login">Login</Link></li>
+                                <li><Link to="/register">Register</Link></li>
                             </>
                         }
                         
