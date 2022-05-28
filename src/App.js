@@ -25,6 +25,9 @@ import Orders from "./views/Admin/Orders";
 import Reviews from "./views/Admin/Reviews";
 import AddUser from "./Components/Admin/AddUser";
 import UpdateUser from "./Components/Admin/UpdateUser";
+import AddProduct from "./Components/Admin/AddProduct";
+import UpdateProduct from "./Components/Admin/UpdateProduct";
+import UpdateOrder from "./Components/Admin/UpdateOrder";
 
 
 function App() {
@@ -65,8 +68,15 @@ function App() {
                  
 
               <Route path="/admin/products" element={<Products/>}/>
+              <Route  path="/admin/products/add" element={<AddProduct/>}/>
+              <Route  path="/admin/products/update/:id" element={<UpdateProduct/>}/>
+
               <Route path="/admin/orders" element={<Orders/>}/>
+              <Route  path="/admin/orders/update/:id" element={<UpdateOrder/>}/>
+
               <Route path="/admin/reviews" element={<Reviews/>}/>
+
+              <Route path="/admin/*" element={<NotFound/>} />
               
             </Route>
           </Routes>

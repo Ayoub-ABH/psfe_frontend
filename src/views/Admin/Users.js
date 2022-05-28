@@ -10,7 +10,7 @@ function Users() {
   const columns = [
     {
       name: "IMAGE",
-      selector: (row) => <img src="img/profile.jpg" class="img-responsive admin-user-image" alt="profile"/>
+      selector: (row) => <img src="img/profile.jpg" class="img-responsive w-50 admin-user-image" alt="profile"/>
     },
     {
       name: "NAME",
