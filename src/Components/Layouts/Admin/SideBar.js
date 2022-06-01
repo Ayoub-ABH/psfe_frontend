@@ -43,12 +43,12 @@ function SideBar() {
             </Link>
           </li>
           <li role="presentation">
-            <Link to="/admin" onClick={handleClickLink}>
+            <Link to="/admin/messages" onClick={handleClickLink}>
               <i class="fa fa-th-list" aria-hidden="true"></i>  Messages
             </Link>
           </li>
           <li role="presentation">
-            <Link to="/admin" onClick={handleClickLink}>
+            <Link to="/admin/settings" onClick={handleClickLink}>
             <i class="fa fa-cogs" aria-hidden="true"></i> Settings
             </Link>
           </li>

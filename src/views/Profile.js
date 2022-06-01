@@ -24,14 +24,7 @@ function Profile() {
           <h5>role: {user.role}</h5>
           <h5>email:{user.email}</h5>
         </div>
-        <div className="col-lg-4 col-md-6  profile-detail">
-          <h3>billing Adress</h3>
-          <h5>address: </h5>
-          <h5>city: </h5>
-          <h5>country:</h5>
-          <h5>psotaleCode:</h5>
-          <h5>telephone:</h5>
-        </div>
+
       </div>
 
       <div className="row ">
@@ -44,10 +37,10 @@ function Profile() {
 
       <div className="row boxing" style={{ marginBottom: "25px" }}>
 
-          <div className="col-lg-6">
+        <div className="col-lg-6">
           <form role="form">
 
-            <h4>update profile informations</h4>
+            <h4></h4>
             <div class="form-group ">
               <label htmlfor="name">New Name</label>
               <input
@@ -86,73 +79,15 @@ function Profile() {
               />
             </div>
             <button type="submit" class="btn btn-primary ">
-               update profile info
-             </button>
+              update profile info
+            </button>
 
-             </form>
-          </div>
+          </form>
 
-          <div className="col-lg-6">
-            <h4>update billing adress</h4>
+        </div>
 
-            <form role="form">
 
-            <div class="form-group">
-              <label htmlfor="address">New address</label>
-              <input
-                type="text"
-                class="input"
-                name="address"
-                placeholder="address"
-              />
-            </div>
 
-            <div class="form-group ">
-              <label htmlFor="city">New city</label>
-              <input
-                type="text"
-                class="input"
-                name="city"
-                placeholder="new city"
-              />
-            </div>
-            <div class="form-group ">
-              <label htmlFor="postalCode">New Postale Code</label>
-              <input
-                type="text"
-                class="input"
-                name="postalCode"
-                placeholder="new postale code"
-              />
-            </div>
-            <div class="form-group ">
-              <label htmlFor="telephone">New telephone</label>
-              <input
-                type="text"
-                class="input"
-                name="telephone"
-                placeholder="new password"
-              />
-            </div>
-            <div class="form-group ">
-              <label htmlFor="country">New Country</label>
-              <input
-                type="text"
-                class="input"
-                name="country"
-                placeholder="new country"
-              />
-            </div>
-
-             <button type="submit" class="btn btn-primary ">
-               update billing address
-             </button>
-
-             </form>
-          </div>
-
-         
-        
       </div>
 
       <div className="row">
@@ -168,18 +103,32 @@ function Profile() {
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>order</th>
-                <th>order</th>
-                <th>order</th>
-                <th>order</th>
+                <th>ORDER ITEMS</th>
+                <th>SHIPPING ADDRESS</th>
+                <th>PAYMENT METHOD</th>
+                <th>TOTAL PRICE</th>
+                <th>STATUS</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>hhhh</td>
-                <td>order</td>
-                <td>order</td>
-                <td>order</td>
+                <td>4 products</td>
+                <td>
+                    <div style={{ paddingTop: "5px" }}>
+                      <p>phone:   0624536478 </p>
+                      <p>country: maroc </p>
+                      <p>address: Tamgroute</p>
+                      <p>postale code:  46000</p>
+                      <p>city:  zagora </p>
+                    </div>
+                </td>
+                <td>Card</td>
+                <td>
+                  $2229.45
+                </td>
+                <td>
+                  <span class="label label-info">pending</span>
+                </td>
               </tr>
             </tbody>
           </table>

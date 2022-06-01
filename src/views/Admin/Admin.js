@@ -13,42 +13,42 @@ function Admin() {
 
       <div>
         <div className="col-md-3 col-xs-6">
-          <div class="alert alert-success">
+          <div class="alert alert-success" style={{textAlign:'center'}}>
             <p>
               <strong>Total Users</strong>
             </p>
-            <p>Alert body ...</p>
-            <p>to the moon</p>
+            <p>4</p>
+            <p>Stored</p>
           </div>
         </div>
 
         <div className="col-md-3 col-xs-6">
-          <div class="alert alert-info">
+          <div class="alert alert-info" style={{textAlign:'center'}}>
             <p>
               <strong>Total Products</strong>
             </p>
-            <p>30</p>
-            <p>to the moon</p>
+            <p>12</p>
+            <p>Strored</p>
           </div>
         </div>
 
         <div className="col-md-3 col-xs-6">
-          <div class="alert alert-warning">
+          <div class="alert alert-warning" style={{textAlign:'center'}}>
             <p>
               <strong>Total Reviews</strong>
             </p>
-            <p>90</p>
-            <p>to the moon</p>
+            <p>5</p>
+            <p>Stored</p>
           </div>
         </div>
 
         <div className="col-md-3 col-xs-6">
-          <div class="alert alert-danger">
+          <div class="alert alert-danger" style={{textAlign:'center'}}>
             <p>
               <strong>Total Orders</strong>
             </p>
-            <p>100</p>
-            <p>to the moon</p>
+            <p>16</p>
+            <p>Stored</p>
           </div>
         </div>
 

@@ -29,7 +29,7 @@ const PayButton = ({ cartItems }) => {
     return (
         <>
             <button onClick={() => handleCheckout()} className="btn btn-success nr-l" >
-                Checkout <i className="fa fa-arrow-circle-right" />
+                Checkout with <strong>stripe</strong> <i className="fa fa-arrow-circle-right" />
             </button>
         </>
     );

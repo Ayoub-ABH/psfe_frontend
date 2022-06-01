@@ -245,7 +245,7 @@
 }
 .admin-account{
     margin-top: 18px;
-    margin-left: 218px;
+    margin-left: 318px;
 }
 #admine-header{
     padding-top: 0px;
@@ -273,6 +273,9 @@
     width: 50%;
 }
 
+.rgc{
+    height: 530px;
+}
 .admin-data-table{
     margin-left: 20px;
     margin-right: 20px;

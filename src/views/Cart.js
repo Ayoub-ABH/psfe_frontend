@@ -76,14 +76,14 @@ function Cart() {
 
       <div className="container cart-mounts">
         <div className="row ">
-          <div className="col-lg-6 sum-cart">
+          <div className="col-lg-12 sum-cart">
             <div className="cart-summary">
               <h3>{cartTotalQuantity} Product(s) on the cart</h3>
               <h4>SUBTOTAL: ${cartTotalAmount}</h4>
             </div>
             <div className="cart-btns">
               <button onClick={ ()=>{dispatch(clearCart())}} className="btn btn-danger ">CLEAR CART</button>
-              {/* <PayButton  cartItems={cartItems} /> */}
+              <PayButton  cartItems={cartItems} />
               <Link className="btn btn-success nr-l" to="/checkout">
                 checkout<i className="fa fa-arrow-circle-right" />
               </Link>

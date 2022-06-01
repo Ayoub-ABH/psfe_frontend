@@ -17,11 +17,9 @@ function Orders() {
     {
       name: "ORDER ITEMS",
       cell: (row) => 
-          <>
           <p>
-            {row.orderItems[0].quantity}
+            {row.orderItems.length} Products
           </p>
-          </>
       ,
       wrap:true,
       width:'220px',
@@ -54,7 +52,14 @@ function Orders() {
       sortable:true
     },
     {
+      name: "STATUS",
+      cell: (row) => 
+      <span class="label label-info">{row.status}</span>,
+      sortable:true
+    },
+    {
       name: "EDIT",
+      width:'150px',
       cell: row => 
           <>
           <button type="button" class="btn btn-sm btn-danger" onClick={()=> alert(row.id)}>delete</button>
@@ -70,15 +75,29 @@ function Orders() {
       orderItems:[{product:"6275412b66f5e2e95cee7a7d",quantity:2},{product:"62753faef9113e6808214ec1",quantity:1}],
       shippingAddress:
       {
-          fullname:"ayoub",
-          phone:"03983939" ,
-          address:"hhhhhhhhhhhhhhhh" ,
-          city:"hhh",
-          postalCode:"4444444444" ,
-          country:"haha"
+          phone:"0619326345" ,
+          address:"Tamgroute" ,
+          city:"Zagora",
+          postalCode:"46000" ,
+          country:"Maroc"
       },
-      paymentMethod:"paypal",
-      shippingPrice:33,
+      paymentMethod:"card",
+      status:"pending",
+      totalPrice:123
+    },
+    {
+      user:"ali",
+      orderItems:[{product:"6275412b66f5e2e95cee7a7d",quantity:2}],
+      shippingAddress:
+      {
+          phone:"0619326345" ,
+          address:"lhricha" ,
+          city:"hwara",
+          postalCode:"8350" ,
+          country:"Maroc"
+      },
+      paymentMethod:"card",
+      status:"validated",
       totalPrice:123
     }
   ]
@@ -97,6 +116,9 @@ function Orders() {
 
   return (
     <div className="section mt-80">
+      
+      
+      
     <div className="admin-data-table">
         <DataTable 
           title="List of Orders"

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
 	return (
@@ -16,16 +17,16 @@ export default function Footer() {
 								</form>
 								<ul className="newsletter-follow">
 									<li>
-										<a href="#"><i className="fa fa-facebook" /></a>
+										<Link to="/"><i className="fa fa-facebook" /></Link>
 									</li>
 									<li>
-										<a href="#"><i className="fa fa-twitter" /></a>
+										<Link to="/"><i className="fa fa-twitter" /></Link>
 									</li>
 									<li>
-										<a href="#"><i className="fa fa-instagram" /></a>
+										<Link to="/"><i className="fa fa-instagram" /></Link>
 									</li>
 									<li>
-										<a href="#"><i className="fa fa-pinterest" /></a>
+										<Link to="/"><i className="fa fa-pinterest" /></Link>
 									</li>
 								</ul>
 							</div>
@@ -45,11 +46,11 @@ export default function Footer() {
 							<div className="col-md-3 col-xs-6">
 								<div className="footer">
 									<h3 className="footer-title">About Us</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+									<p>electro find your best electronic divices with great price.</p>
 									<ul className="footer-links">
-										<li><a href="#"><i className="fa fa-map-marker" />1734 Stonecoal Road</a></li>
-										<li><a href="#"><i className="fa fa-phone" />+021-95-51-84</a></li>
-										<li><a href="#"><i className="fa fa-envelope-o" />email@email.com</a></li>
+										<li><Link to="/"><i className="fa fa-map-marker" />merrakech</Link></li>
+										<li><Link to="/"><i className="fa fa-phone" />+212-6-95-51-84</Link></li>
+										<li><Link to="/"><i className="fa fa-envelope-o" />Electro.shop@electro.com</Link></li>
 									</ul>
 								</div>
 							</div>
@@ -57,11 +58,11 @@ export default function Footer() {
 								<div className="footer">
 									<h3 className="footer-title">Categories</h3>
 									<ul className="footer-links">
-										<li><a href="#">Hot deals</a></li>
-										<li><a href="#">Laptops</a></li>
-										<li><a href="#">Smartphones</a></li>
-										<li><a href="#">Cameras</a></li>
-										<li><a href="#">Accessories</a></li>
+										<li><Link to="/">Hot deals</Link></li>
+										<li><Link to="/">Laptops</Link></li>
+										<li><Link to="/">Smartphones</Link></li>
+										<li><Link to="/">Cameras</Link></li>
+										<li><Link to="/">Accessories</Link></li>
 									</ul>
 								</div>
 							</div>
@@ -70,11 +71,11 @@ export default function Footer() {
 								<div className="footer">
 									<h3 className="footer-title">Information</h3>
 									<ul className="footer-links">
-										<li><a href="#">About Us</a></li>
-										<li><a href="#">Contact Us</a></li>
-										<li><a href="#">Privacy Policy</a></li>
-										<li><a href="#">Orders and Returns</a></li>
-										<li><a href="#">Terms &amp; Conditions</a></li>
+										<li><Link to="/">About Us</Link></li>
+										<li><Link to="/">Contact Us</Link></li>
+										<li><Link to="/">Privacy Policy</Link></li>
+										<li><Link to="/">Orders and Returns</Link></li>
+										<li><Link to="/">Terms &amp; Conditions</Link></li>
 									</ul>
 								</div>
 							</div>
@@ -82,11 +83,11 @@ export default function Footer() {
 								<div className="footer">
 									<h3 className="footer-title">Service</h3>
 									<ul className="footer-links">
-										<li><a href="#">My Account</a></li>
-										<li><a href="#">View Cart</a></li>
-										<li><a href="#">Wishlist</a></li>
-										<li><a href="#">Track My Order</a></li>
-										<li><a href="#">Help</a></li>
+										<li><Link to="/">My Account</Link></li>
+										<li><Link to="/">View Cart</Link></li>
+										<li><Link to="/">Wishlist</Link></li>
+										<li><Link to="/">Track My Order</Link></li>
+										<li><Link to="/">Help</Link></li>
 									</ul>
 								</div>
 							</div>
@@ -102,15 +103,15 @@ export default function Footer() {
 						<div className="row">
 							<div className="col-md-12 text-center">
 								<ul className="footer-payments">
-									<li><a href="#"><i className="fa fa-cc-visa" /></a></li>
-									<li><a href="#"><i className="fa fa-credit-card" /></a></li>
-									<li><a href="#"><i className="fa fa-cc-paypal" /></a></li>
-									<li><a href="#"><i className="fa fa-cc-mastercard" /></a></li>
-									<li><a href="#"><i className="fa fa-cc-discover" /></a></li>
-									<li><a href="#"><i className="fa fa-cc-amex" /></a></li>
+									<li><Link to="/"><i className="fa fa-cc-visa" /></Link></li>
+									<li><Link to="/"><i className="fa fa-credit-card" /></Link></li>
+									<li><Link to="/"><i className="fa fa-cc-paypal" /></Link></li>
+									<li><Link to="/"><i className="fa fa-cc-mastercard" /></Link></li>
+									<li><Link to="/"><i className="fa fa-cc-discover" /></Link></li>
+									<li><Link to="/"><i className="fa fa-cc-amex" /></Link></li>
 								</ul>
 								<span className="copyright">
-									<a target="_blank" href="#">AIT BABA HAMOU Ayoub © 2022</a>
+									<span style={{color:'#D10024'}}>AIT BABA HAMOU Ayoub © 2022</span>
 								</span>
 							</div>
 						</div>

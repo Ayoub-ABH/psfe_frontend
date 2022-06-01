@@ -28,6 +28,10 @@ import UpdateUser from "./Components/Admin/UpdateUser";
 import AddProduct from "./Components/Admin/AddProduct";
 import UpdateProduct from "./Components/Admin/UpdateProduct";
 import UpdateOrder from "./Components/Admin/UpdateOrder";
+import Messages from "./views/Admin/Messages";
+import Settings from "./views/Admin/Settings";
+import UpdateSettings from "./Components/Admin/UpdateSettings";
+import Contact from "./views/Contact";
 
 
 function App() {
@@ -47,7 +51,6 @@ function App() {
             <Route element={<UserLayouts/>}>
               <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop/>} />
-              <Route path="/checkout" element={<Checkout/>} />
               <Route path="/product/:id"  element={<Product/>} />
               <Route path="/login" element={<Login/>} />
               <Route path="/register" element={<Register/>} />
@@ -56,6 +59,7 @@ function App() {
               <Route path="/checkout" element={<Checkout/>} />
               <Route path="/checkout-success" element={<CheckoutSuccess/>} />
               <Route path="/profile" element={<Profile/>} />
+              <Route path="/contact" element={<Contact/>} />
               <Route path="*" element={<NotFound/>} />
             </Route>
 
@@ -75,6 +79,10 @@ function App() {
               <Route  path="/admin/orders/update/:id" element={<UpdateOrder/>}/>
 
               <Route path="/admin/reviews" element={<Reviews/>}/>
+              <Route path="/admin/messages" element={<Messages/>}/>
+
+              <Route path="/admin/settings" element={<Settings/>}/>
+              <Route path="/admin/settings/update/:id" element={<UpdateSettings/>}/>
 
               <Route path="/admin/*" element={<NotFound/>} />
               

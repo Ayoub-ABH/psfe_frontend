@@ -61,26 +61,26 @@ function Header() {
         <div className="container">
           <ul className="header-links pull-left hl-mt">
             <li>
-              <a href="#">
-                <i className="fa fa-phone" /> +021-95-51-84
-              </a>
+              <Link to='/'>
+                <i className="fa fa-phone" /> +212-6-95-51-84
+              </Link>
             </li>
             <li>
-              <a href="#">
-                <i className="fa fa-envelope-o" /> email@email.com
-              </a>
+              <Link to='/'>
+                <i className="fa fa-envelope-o" /> Electro.shop@electro.com
+              </Link>
             </li>
             <li>
-              <a href="#">
-                <i className="fa fa-map-marker" /> 1734 Stonecoal Road
-              </a>
+              <Link to='/'>
+                <i className="fa fa-map-marker" />  merrakech
+              </Link>
             </li>
           </ul>
           <ul className="header-links pull-right ">
             <li>
-              <a href="#">
+              <Link to='/'>
                 <i className="fa fa-dollar" /> USD
-              </a>
+              </Link>
             </li>
             <li>
               {user ? (
@@ -169,13 +169,13 @@ function Header() {
             <div className="col-md-3 clearfix">
               <div className="header-ctn">
                 {/*<!-- Wishlist -->*/}
-                <div>
+                {/* <div>
                   <Link to="/wishlist">
                     <i className="fa fa-heart-o" />
                     <span>Your Wishlist</span>
                     <div className="qty">2</div>
                   </Link>
-                </div>
+                </div> */}
 
                 {/*<!-- /Wishlist -->*/}
 

@@ -10,7 +10,7 @@ function Users() {
   const columns = [
     {
       name: "IMAGE",
-      selector: (row) => <img src="img/profile.jpg" class="img-responsive w-50 admin-user-image" alt="profile"/>
+      selector: (row) => <img src={`img/${row.image}`} class="img-responsive w-50 admin-user-image" alt="profile"/>
     },
     {
       name: "NAME",
@@ -41,77 +41,32 @@ function Users() {
   const data = [
     {
       id: 1,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
+      image:"profile.jpg",
+      name: "ayoub",
+      role: "admin",
+      email: "ayoub@gmail.com"
     },
     {
       id: 2,
-      name: "hassan",
+      image:"profile-img.png",
+      name: "hassan eddamer",
       role: "user",
       email: "hassan@gmail.com"
     },
     {
       id: 3,
-      name: "hassan",
+      image:"profile-img.png",
+      name: "Ali abo ali",
       role: "user",
-      email: "hassan@gmail.com"
+      email: "ali@gmail.com"
     },
     {
       id: 4,
-      name: "hassan",
+      image:"profile-img.png",
+      name: "mostapha",
       role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 5,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 6,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 7,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 8,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 9,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 10,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 11,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 12,
-      name: "hassan",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    
+      email: "mostapha@gmail.com"
+    }
   ];
 
 

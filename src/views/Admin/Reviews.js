@@ -39,13 +39,6 @@ function Reviews() {
           >
             delete
           </button>
-          <button
-            type="button"
-            class="btn btn-sm btn-info nr-l"
-            onClick={() => navigate(`/admin/products/update/${row.id}`)}
-          >
-            update
-          </button>
         </>
       ),
     },
@@ -55,7 +48,14 @@ function Reviews() {
       id: "6288f269e4512ccbfcfeb257",
       name: "simo",
       rating: 3,
-      comment: "ddddddddd",
+      comment: "nice product",
+      product: "6288edff310168634c804985",
+    },
+    {
+      id: "6288f269e4512ccbfcfeb457",
+      name: "ayoub",
+      rating: 3,
+      comment: "produit nadiiii",
       product: "6288edff310168634c804985",
     },
   ];

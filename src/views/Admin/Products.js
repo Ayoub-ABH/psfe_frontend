@@ -23,50 +23,55 @@ function Products() {
     {
       name: "DESCRIPTION",
       selector: (row) => row.description,
-      wrap:true,
-      minWidth:'500px',
+      width:'100px',
       sortable:true
     },
     {
       name: "DETAILS",
       selector: (row) => row.details,
-      wrap:true,
-      minWidth:'500px',
+      width:'100px',
       sortable:true
     },
     ,
     {
       name: "BRAND",
       selector: (row) => row.brand,
+      width:'100px',
       sortable:true
     },
     {
       name: "CATEGORY",
       selector: (row) => row.category,
+      width:'100px',
       sortable:true
     },
     {
       name: "PRICE",
       selector: (row) => row.price,
+      width:'100px',
       sortable:true
     },
     {
       name: "QUANTITY",
       selector: (row) => row.quantity,
+      width:'100px',
       sortable:true
     },
     {
       name: "RATING",
       selector: (row) => row.rating,
+      width:'100px',
       sortable:true
     },
     {
       name: "NUMBER REVIEWS",
       selector: (row) => row.numReviews,
+      width:'100px',
       sortable:true
     },
     {
       name: "EDIT",
+      width:'150px',
       cell: row => 
           <>
           <button type="button" class="btn btn-sm btn-danger" onClick={()=> alert(row.id)}>delete</button>

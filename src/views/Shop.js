@@ -70,7 +70,6 @@ function Shop() {
                         />
                         <label>
                           <span style={{ color: "#D10024" }}>{category}</span>
-                          <small>(120)</small>
                         </label>
                       </div>
                     ))
@@ -133,7 +132,6 @@ function Shop() {
                         />
                         <label>
                           <span style={{ color: "#D10024" }}>{brand}</span>
-                          <small>(120)</small>
                         </label>
                       </div>
                     ))
