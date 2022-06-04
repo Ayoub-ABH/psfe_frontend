@@ -15,7 +15,7 @@ function Profile() {
 
       <div className="row boxing" style={{ marginBottom: "25px" }}>
         <div className="col-lg-3 col-md-3 product-preview ">
-          <img src="img/profile.jpg" alt="profile-image" />
+          <img src={`img/${user.profilePicture}`} alt="profile-image" />
         </div>
 
         <div className="col-lg-4 col-md-6  profile-detail">

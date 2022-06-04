@@ -4,6 +4,7 @@ import reviewService from "./reviewServices";
 
 const initialState = {
     productReviews:{},
+    allReviews:[],
     isSuccess: false,
     isLoading: false,
     isError: false,
@@ -66,6 +67,24 @@ export const deleteReview = createAsyncThunk(
 );
 
 
+//get Product reviews
+export const getAllReviews = createAsyncThunk(
+  "review/all reviews",
+  async (_,thunkAPI) => {
+    try {
+      return await reviewService.getAllReviews();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const reviewSlice = createSlice({
     name: "review",
     initialState,
@@ -118,6 +137,21 @@ const reviewSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(deleteReview.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+
+      .addCase(getAllReviews.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllReviews.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.allReviews = action.payload;
+      })
+      .addCase(getAllReviews.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link,  useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteOrder, getAllOrders, reset } from "../../features/order/orderSlice";
+import { toast } from "react-toastify";
 
 function Orders() {
   const [search,setSearch] = useState("");
   const [orders,setOrders] =useState([]);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {allOrders,isSuccess,isLoading,message,isError} = useSelector(
+    (state) => state.orders
+  );
 
   const columns = [
     {
       name: "USER",
-      selector: (row) => row.user,
+      selector: (row) => row.name,
       keyField:true,
       sortable:true
     },
@@ -62,57 +69,30 @@ function Orders() {
       width:'150px',
       cell: row => 
           <>
-          <button type="button" class="btn btn-sm btn-danger" onClick={()=> alert(row.id)}>delete</button>
-          <button type="button" class="btn btn-sm btn-info nr-l" onClick={()=> navigate(`/admin/orders/update/${row.id}`)}>update</button>
+          <button type="button" class="btn btn-sm btn-danger" onClick={()=> dispatch(deleteOrder(row._id))}>delete</button>
+          <button type="button" class="btn btn-sm btn-info nr-l" onClick={()=> navigate(`/admin/orders/update/${row._id}`)}>update</button>
           </>
       ,
     },
   ];
 
-  const data = [
-    {
-      user:"ayoub",
-      orderItems:[{product:"6275412b66f5e2e95cee7a7d",quantity:2},{product:"62753faef9113e6808214ec1",quantity:1}],
-      shippingAddress:
-      {
-          phone:"0619326345" ,
-          address:"Tamgroute" ,
-          city:"Zagora",
-          postalCode:"46000" ,
-          country:"Maroc"
-      },
-      paymentMethod:"card",
-      status:"pending",
-      totalPrice:123
-    },
-    {
-      user:"ali",
-      orderItems:[{product:"6275412b66f5e2e95cee7a7d",quantity:2}],
-      shippingAddress:
-      {
-          phone:"0619326345" ,
-          address:"lhricha" ,
-          city:"hwara",
-          postalCode:"8350" ,
-          country:"Maroc"
-      },
-      paymentMethod:"card",
-      status:"validated",
-      totalPrice:123
+  useEffect(async()=>{
+
+    await dispatch(getAllOrders())
+    if(isSuccess) {
+      toast.success(message)
     }
-  ]
-  useEffect(()=>{
-    setOrders(data)
-  },[])
+    dispatch(reset())
+    
+  },[message])
 
+  // useEffect(()=>{
+  //   const newData=data.filter(dataItem =>{
+  //     return dataItem.user.toLowerCase().match(search.toLowerCase());
+  //   })
+  //   setOrders(newData)
 
-  useEffect(()=>{
-    const newData=data.filter(dataItem =>{
-      return dataItem.user.toLowerCase().match(search.toLowerCase());
-    })
-    setOrders(newData)
-
-  },[search])
+  // },[search])
 
   return (
     <div className="section mt-80">
@@ -123,7 +103,8 @@ function Orders() {
         <DataTable 
           title="List of Orders"
           columns={columns} 
-          data={orders}
+          keyField="_id"
+          data={allOrders}
           pagination 
           fixedHeader
           fixedHeaderScrollHeight="55vh"

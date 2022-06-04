@@ -3,13 +3,14 @@ import orderService from "./orderServices";
 
 const initialState = {
   order:{},
+  allOrders:[],
   isSuccess: false,
   isLoading: false,
   isError: false,
   message: ""
 }
 
-//get newPoducts
+//add order
 export const addOrder = createAsyncThunk(
     "order/Add",
     async (order,thunkAPI) => {
@@ -25,7 +26,61 @@ export const addOrder = createAsyncThunk(
         return thunkAPI.rejectWithValue(message);
       }
     }
-  );
+ );
+
+
+ export const getAllOrders = createAsyncThunk(
+  "order/all",
+  async (_,thunkAPI) => {
+    try {
+      return await orderService.getAllOrders();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const deleteOrder = createAsyncThunk(
+  "order/delete",
+  async (idOrder,thunkAPI) => {
+    try {
+      return await orderService.deleteOrder(idOrder);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+
+export const updateOrderStatus = createAsyncThunk(
+  "order/update",
+  async (orderData,thunkAPI) => {
+    try {
+      return await orderService.updateOrderStatus(orderData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 
 
   const orderSlice = createSlice({
@@ -50,6 +105,41 @@ export const addOrder = createAsyncThunk(
         state.isSuccess = true;
       })
       .addCase(addOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+
+      .addCase(getAllOrders.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.allOrders=action.payload;
+      })
+
+      .addCase(deleteOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message= action.payload;
+      })
+      .addCase(deleteOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(updateOrderStatus.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateOrderStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message= action.payload;
+      })
+      .addCase(updateOrderStatus.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -31,14 +31,46 @@ const getOneProduct = async (id) => {
   return response.data;
 }
   
+const getAllProductsAdmin = async () => {
+  const response = await axios.get(API_URL+'all/allPrds')
+  return response.data;
+}
   
-  
+const addProduct = async (productData) => {
+  const data = new FormData();
+ 
+  data.append("image", productData.fileData);
+  data.append("name",productData.product.name);
+  data.append("brand",productData.product.brand);
+  data.append("category",productData.product.category);
+  data.append("description",productData.product.description);
+  data.append("details",productData.product.details);
+  data.append("numReviews",productData.product.numReviews);
+  data.append("old_price",productData.product.old_price);
+  data.append("price",productData.product.price);
+  data.append("quantity",productData.product.quantity);
+  data.append("rating",productData.product.rating);
+
+  const response = await axios.post(API_URL+'add/add',data,{
+    headers:{ "Content-Type": "multipart/form-data" }
+  })
+  return response.data;
+}
+
+//delete  a user
+const deleteProduct = async (idProduct) => {
+  const response = await axios.delete(API_URL+"delete/"+idProduct);
+  return response.data;
+}
   
   const productService = {
     getHomeProducts,
     getAllProducts,
     getSomeProducts,
-    getOneProduct
+    getOneProduct,
+    getAllProductsAdmin,
+    addProduct,
+    deleteProduct
   }
   
   export default productService;

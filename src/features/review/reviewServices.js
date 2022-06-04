@@ -36,11 +36,20 @@ const deleteProductReview = async (Review) => {
 }
 
 
+// get  all reviews
+const getAllReviews = async () => {
+  const response = await axios.get(API_URL+'allReviews')
+  return response.data;
+}
+
+
+
 
 const reviewService = {
   addProductReview,
   getAllProductReviews,
-  deleteProductReview
+  deleteProductReview,
+  getAllReviews
 }
 
 export default reviewService;

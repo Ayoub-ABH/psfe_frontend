@@ -4,6 +4,7 @@ import productService from "./productServices";
 const initialState = {
   products: {new :[],top:[]}, 
   shopProducts:{},
+  allProducts:[],
   categories:[],
   product:{},
   brands:[],
@@ -49,6 +50,24 @@ export const getAllProducts = createAsyncThunk(
   }
 );
 
+//get allProducts amdin
+export const getAllProductsAdmin = createAsyncThunk(
+  "product/getAllAdmin",
+  async (_,thunkAPI) => {
+    try {
+      return await productService.getAllProductsAdmin();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //get SomeProducts
 export const getSomeProducts = createAsyncThunk(
   "product/getSome",
@@ -74,6 +93,41 @@ export const getOneProduct = createAsyncThunk(
   async (id,thunkAPI) => {
     try {
       return await productService.getOneProduct(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+//add product 
+export const addProduct = createAsyncThunk(
+  "product/add",
+  async (productData,thunkAPI) => {
+    try {
+      return await productService.addProduct(productData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+//delete product
+export const deleteProduct = createAsyncThunk(
+  "product/delete",
+  async (idProduct,thunkAPI) => {
+    try {
+      return await productService.deleteProduct(idProduct);
     } catch (error) {
       const message =
         (error.response &&
@@ -133,6 +187,8 @@ const productSlice = createSlice({
         state.message = action.payload;
       })
 
+      
+      
       .addCase(getSomeProducts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
@@ -158,6 +214,41 @@ const productSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+
+      .addCase(getAllProductsAdmin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.allProducts=action.payload;
+      })
+
+      .addCase(addProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message=action.payload;
+      })
+      .addCase(addProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(deleteProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message=action.payload;
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      
     },
 });
 

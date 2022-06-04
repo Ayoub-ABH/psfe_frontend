@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import { deleteReview, getAllReviews, reset } from "../../features/review/reviewSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 function Reviews() {
   const [search, setSearch] = useState("");
   const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const {allReviews,isSuccess,isLoading,message,isError} = useSelector(
+    (state) => state.reviews
+  );
+
 
   const columns = [
     {
@@ -15,7 +22,8 @@ function Reviews() {
     },
     {
       name: "PRODUCT",
-      selector: (row) => row.product,
+      selector: (row) => row.productName,
+      width:"300px",
       sortable: true,
     },
     {
@@ -26,6 +34,7 @@ function Reviews() {
     {
       name: "COMMENT",
       selector: (row) => row.comment,
+      width:"300px",
       sortable: true,
     },
     {
@@ -35,7 +44,7 @@ function Reviews() {
           <button
             type="button"
             class="btn btn-sm btn-danger"
-            onClick={() => alert(row.id)}
+            onClick={() => dispatch(deleteReview({idReview:row._id,idProduct:row.product}))}
           >
             delete
           </button>
@@ -43,40 +52,30 @@ function Reviews() {
       ),
     },
   ];
-  const data = [
-    {
-      id: "6288f269e4512ccbfcfeb257",
-      name: "simo",
-      rating: 3,
-      comment: "nice product",
-      product: "6288edff310168634c804985",
-    },
-    {
-      id: "6288f269e4512ccbfcfeb457",
-      name: "ayoub",
-      rating: 3,
-      comment: "produit nadiiii",
-      product: "6288edff310168634c804985",
-    },
-  ];
-  useEffect(() => {
-    setReviews(data);
-  }, []);
 
-  useEffect(() => {
-    const newData = data.filter((dataItem) => {
-      return dataItem.name.toLowerCase().match(search.toLowerCase());
-    });
-    setReviews(newData);
-  }, [search]);
+  useEffect(async()=>{
+    await dispatch(getAllReviews())
+    if(isSuccess) {
+      toast.success(message)
+    }
+    dispatch(reset())
+  },[message])
+
+  // useEffect(() => {
+  //   const newData = data.filter((dataItem) => {
+  //     return dataItem.name.toLowerCase().match(search.toLowerCase());
+  //   });
+  //   setReviews(newData);
+  // }, [search]);
 
   return (
     <div className="section mt-80">
       <div className="admin-data-table">
         <DataTable
           title="List of Reviews"
+          keyField="_id"
           columns={columns}
-          data={reviews}
+          data={allReviews}
           pagination
           fixedHeader
           fixedHeaderScrollHeight="54vh"
