@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
+import { deleteUser, getAllUsers, reset } from "../../features/user/userSlice";
+import { toast } from "react-toastify";
 
 function Users() {
   const [search,setSearch] = useState("");
-  const [users,setUsers] =useState([]);
+  
   const navigate = useNavigate()
+  const dispatch = useDispatch() 
+  const [users,setUsers] =useState([]);
+  const {allUsers,isSuccess,isLoading,message,isError} = useSelector(
+    (state) => state.users
+  );
 
   const columns = [
     {
       name: "IMAGE",
-      selector: (row) => <img src={`img/${row.image}`} class="img-responsive w-50 admin-user-image" alt="profile"/>
+      selector: (row) => <img src={`img/${row.profilePicture}`} class="img-responsive w-50 admin-user-image" alt="profile"/>
     },
     {
       name: "NAME",
@@ -31,56 +39,30 @@ function Users() {
       name: "EDIT",
       cell: row => 
           <>
-          <button type="button" class="btn btn-sm btn-danger" onClick={()=> alert(row.id)}>delete</button>
-          <button type="button" class="btn btn-sm btn-info nr-l" onClick={()=> navigate(`/admin/users/update/${row.id}`)}>update</button>
+          <button type="button" class="btn btn-sm btn-danger" onClick={()=> {dispatch(deleteUser(row._id))}}>delete</button>
+          <button type="button" class="btn btn-sm btn-info nr-l" onClick={()=> navigate(`/admin/users/update/${row._id}`)}>update</button>
           </>
       ,
     },
   ];
 
-  const data = [
-    {
-      id: 1,
-      image:"profile.jpg",
-      name: "ayoub",
-      role: "admin",
-      email: "ayoub@gmail.com"
-    },
-    {
-      id: 2,
-      image:"profile-img.png",
-      name: "hassan eddamer",
-      role: "user",
-      email: "hassan@gmail.com"
-    },
-    {
-      id: 3,
-      image:"profile-img.png",
-      name: "Ali abo ali",
-      role: "user",
-      email: "ali@gmail.com"
-    },
-    {
-      id: 4,
-      image:"profile-img.png",
-      name: "mostapha",
-      role: "user",
-      email: "mostapha@gmail.com"
+
+
+  useEffect(async()=>{
+
+    await dispatch(getAllUsers())
+    if(isSuccess) {
+      toast.success(message)
     }
-  ];
+    dispatch(reset())
+  },[message])
 
 
   useEffect(()=>{
-    setUsers(data)
-  },[])
-
-
-  useEffect(()=>{
-    const newData=data.filter(dataItem =>{
+    const newData=allUsers.filter(dataItem =>{
       return dataItem.name.toLowerCase().match(search.toLowerCase());
     })
     setUsers(newData)
-
   },[search])
 
   return (
@@ -88,8 +70,9 @@ function Users() {
       <div className="admin-data-table">
           <DataTable 
             title="List of Users"
+            keyField="_id"
             columns={columns} 
-            data={users}
+            data={allUsers}
             pagination 
             fixedHeader
             fixedHeaderScrollHeight="54vh"

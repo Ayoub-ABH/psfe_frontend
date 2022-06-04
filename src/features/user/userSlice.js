@@ -6,6 +6,7 @@ const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
 const initialState = {
   user: userInfo ? userInfo.user : null,
+  allUsers:[],
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -50,6 +51,61 @@ export const login = createAsyncThunk(
   }
 );
 
+// Add user
+export const addUser = createAsyncThunk(
+  "user/add",
+  async (user, thunkAPI) => {
+    try {
+      return await userService.addUser(user);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Add user
+export const deleteUser = createAsyncThunk(
+  "user/delete",
+  async (idUser, thunkAPI) => {
+    try {
+      return await userService.deleteUser(idUser);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+//get all users
+export const getAllUsers = createAsyncThunk(
+  "user/get all",
+  async (_, thunkAPI) => {
+    try {
+      return await userService.getAllUsers();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -92,9 +148,43 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      });
+      })
+
+      .addCase(addUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message=action.payload;
+      })
+      .addCase(addUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message=action.payload;
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.allUsers = action.payload;
+      })
   },
 });
 
-export const { reset,logout } = userSlice.actions;
+export const { reset,logout} = userSlice.actions;
 export default userSlice.reducer;
