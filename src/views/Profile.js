@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import UserOrders from "../Components/Profile/UserOrders";
 
 function Profile() {
   const { user } = useSelector((state) => state.users);
@@ -98,42 +99,7 @@ function Profile() {
         </div>
       </div>
 
-      <div className="row boxing">
-        <div class="table-responsive ">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>ORDER ITEMS</th>
-                <th>SHIPPING ADDRESS</th>
-                <th>PAYMENT METHOD</th>
-                <th>TOTAL PRICE</th>
-                <th>STATUS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>4 products</td>
-                <td>
-                    <div style={{ paddingTop: "5px" }}>
-                      <p>phone:   0624536478 </p>
-                      <p>country: maroc </p>
-                      <p>address: Tamgroute</p>
-                      <p>postale code:  46000</p>
-                      <p>city:  zagora </p>
-                    </div>
-                </td>
-                <td>Card</td>
-                <td>
-                  $2229.45
-                </td>
-                <td>
-                  <span class="label label-info">pending</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <UserOrders/>
     </div>
   );
 }

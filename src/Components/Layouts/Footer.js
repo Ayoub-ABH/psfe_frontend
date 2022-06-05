@@ -1,9 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
-export default function Footer() {
-	return (
-		<div>
+
+const Footer = () => {
+
+  const { allSettings } = useSelector((state) => state.settings);
+ 
+  return (
+	<div>
 			{/*<!-- NEWSLETTER -->*/}
 			<div id="newsletter" className="section">
 				<div className="container">
@@ -47,11 +52,14 @@ export default function Footer() {
 								<div className="footer">
 									<h3 className="footer-title">About Us</h3>
 									<p>electro find your best electronic divices with great price.</p>
+									{allSettings.map(setting=>
 									<ul className="footer-links">
-										<li><Link to="/"><i className="fa fa-map-marker" />merrakech</Link></li>
-										<li><Link to="/"><i className="fa fa-phone" />+212-6-95-51-84</Link></li>
-										<li><Link to="/"><i className="fa fa-envelope-o" />Electro.shop@electro.com</Link></li>
+										<li><Link to="/"><i className="fa fa-map-marker" />{setting.address}</Link></li>
+										<li><Link to="/"><i className="fa fa-phone" />{setting.phone}</Link></li>
+										<li><Link to="/"><i className="fa fa-envelope-o" />{setting.email}</Link></li>
 									</ul>
+									)}
+									
 								</div>
 							</div>
 							<div className="col-md-3 col-xs-6">
@@ -122,5 +130,7 @@ export default function Footer() {
 			</footer>
 			{/*<!-- /FOOTER -->*/}
 		</div>
-	)
+  )
 }
+
+export default Footer

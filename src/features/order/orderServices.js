@@ -42,11 +42,33 @@ const updateOrderStatus = async(orderData)=>{
 }
 
 
+
+const getMyOrders = async()=>{
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    if(userInfo === null){
+      throw new Error("you must Login In to place an Order")
+    }else{
+      const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const response = await axios.get(API_URL+"my",config);
+      return response.data;
+    }
+  
+}
+
+
+
 const orderService = {
     addOrder,
     getAllOrders,
     deleteOrder,
-    updateOrderStatus
+    updateOrderStatus,
+    getMyOrders
   }
   
   export default orderService;

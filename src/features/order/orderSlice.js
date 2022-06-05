@@ -4,6 +4,7 @@ import orderService from "./orderServices";
 const initialState = {
   order:{},
   allOrders:[],
+  myOrders:[],
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -34,6 +35,23 @@ export const addOrder = createAsyncThunk(
   async (_,thunkAPI) => {
     try {
       return await orderService.getAllOrders();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getMyOrders = createAsyncThunk(
+  "order/my",
+  async (_,thunkAPI) => {
+    try {
+      return await orderService.getMyOrders();
     } catch (error) {
       const message =
         (error.response &&
@@ -115,6 +133,13 @@ export const updateOrderStatus = createAsyncThunk(
         state.isLoading = false;
         state.isSuccess = true;
         state.allOrders=action.payload;
+      })
+
+
+      .addCase(getMyOrders.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.myOrders=action.payload;
       })
 
       .addCase(deleteOrder.pending, (state) => {

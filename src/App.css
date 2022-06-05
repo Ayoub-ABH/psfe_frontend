@@ -301,4 +301,11 @@
 .admin-user-image{
     border-radius: 50%;
 }
+
+.cardcontact{
+    width: 40%;
+    border: 2px solid #d10024;
+    margin: 10px auto;
+    border-radius: 10px;
+}
 /*Admin*/

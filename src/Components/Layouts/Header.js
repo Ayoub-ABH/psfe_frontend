@@ -6,6 +6,7 @@ import { logout } from "../../features/user/userSlice";
 import { toast } from "react-toastify";
 import { getAllProducts, getSomeProducts } from "../../features/product/productSlice";
 import { useEffect, useState } from "react";
+import { getAllSettings } from "../../features/settings/settingsSlice";
 
 function Header() {
   const [searchQuery,setSearchQuery] = useState({
@@ -14,6 +15,7 @@ function Header() {
   })
   const { user } = useSelector((state) => state.users);
   const { categories, isSuccess, isError, message } = useSelector((state) => state.products);
+  const { allSettings } = useSelector((state) => state.settings);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -38,6 +40,15 @@ function Header() {
     
   }, []);
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    dispatch(getAllSettings());
+    
+  }, []);
+
   const onsubmit = (e)=>{
     e.preventDefault();
     dispatch(getSomeProducts(searchQuery))
@@ -59,23 +70,27 @@ function Header() {
       {/*<!-- TOP HEADER -->*/}
       <div id="top-header">
         <div className="container">
-          <ul className="header-links pull-left hl-mt">
-            <li>
+          
+            {allSettings.map(setting =>
+            <ul className="header-links pull-left hl-mt">
+              <li>
               <Link to='/'>
-                <i className="fa fa-phone" /> +212-6-95-51-84
+                <i className="fa fa-phone" /> {setting.phone}
               </Link>
             </li>
             <li>
               <Link to='/'>
-                <i className="fa fa-envelope-o" /> Electro.shop@electro.com
+                <i className="fa fa-envelope-o" /> {setting.email}
               </Link>
             </li>
             <li>
               <Link to='/'>
-                <i className="fa fa-map-marker" />  merrakech
+                <i className="fa fa-map-marker" />  {setting.address}
               </Link>
             </li>
           </ul>
+            )}
+            
           <ul className="header-links pull-right ">
             <li>
               <Link to='/'>

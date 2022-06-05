@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
+import { deleteContact, getAllContacts, reset } from "../../features/contact/contactSlice";
+import { toast } from "react-toastify";
 
 const Messages = () => {
   const [search, setSearch] = useState("");
   const [messages, setMessages] = useState([]);
+  const {allContacts,message,isError,isSuccess} = useSelector(state=>state.contacts)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const columns = [
     {
@@ -16,6 +21,7 @@ const Messages = () => {
     {
       name: "EMAIL",
       selector: (row) => row.email,
+      width:'200px',
       sortable: true,
     },
     {
@@ -36,7 +42,7 @@ const Messages = () => {
           <button
             type="button"
             class="btn btn-sm btn-danger"
-            onClick={() => alert(row.id)}
+            onClick={() => dispatch(deleteContact(row._id))}
           >
             delete
           </button>
@@ -44,47 +50,33 @@ const Messages = () => {
       ),
     },
   ];
-  const data = [
-    {
-      id: 1,
-      name: "simo",
-      email: "simo@gmail.com",
-      objet:"probleme",
-      message: "ajouter un produit au panier ne march pas",
-    },
-    {
-      id: 2,
-      name: "ayoub",
-      email: "ayoub@gmail.com",
-      objet:"probleme de payment",
-      message: "verifier le payment",
-    },
-    {
-        id: 3,
-        name: "hassan",
-        email: "hassan@gmail.com",
-        objet:"probleme de lante de reponse",
-        message: "le status de produit n'est pas changer",
-    },
-  ];
-  useEffect(() => {
-    setMessages(data);
-  }, []);
-  useEffect(()=>{
-    const newData=data.filter(dataItem =>{
-      return dataItem.name.toLowerCase().match(search.toLowerCase());
-    })
-    setMessages(newData)
+  
+  useEffect(async()=>{
 
-  },[search])
+    await dispatch(getAllContacts())
+    if(isSuccess) {
+      toast.success(message)
+    }
+    dispatch(reset())
+    
+  },[message])
+
+  // useEffect(()=>{
+  //   const newData=data.filter(dataItem =>{
+  //     return dataItem.name.toLowerCase().match(search.toLowerCase());
+  //   })
+  //   setMessages(newData)
+
+  // },[search])
 
   return (
     <div className="section mt-80">
         <div className="admin-data-table">
             <DataTable
             title="List of Messages"
+            keyField="_id"
             columns={columns}
-            data={messages}
+            data={allContacts}
             pagination
             fixedHeader
             fixedHeaderScrollHeight="54vh"
