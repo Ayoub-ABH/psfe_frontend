@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link,  useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
-import {  deleteProduct, getAllProductsAdmin, reset } from "../../features/product/productSlice";
+import {  deleteProduct, getAllProductsAdmin, reset, setProductsList } from "../../features/product/productSlice";
 import { toast } from "react-toastify";
 
 function Products() {
   const [search,setSearch] = useState("");
-  const [products,setProducts] =useState([]);
+  // const [products,setProducts] =useState([]);
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {allProducts,isSuccess,isLoading,message,isError} = useSelector(
+  const {allProducts,allProductsToSearch,isSuccess,isLoading,message,isError} = useSelector(
     (state) => state.products
   );
   
@@ -103,13 +103,13 @@ function Products() {
   },[message])
 
 
-  // useEffect(()=>{
-  //   const newData=shopProducts.docs.filter(dataItem =>{
-  //     return dataItem.name.toLowerCase().match(search.toLowerCase());
-  //   })
-  //   setProducts(newData)
+  useEffect(()=>{
+    const newData=allProductsToSearch.filter(dataItem =>{
+      return dataItem.name.toLowerCase().match(search.toLowerCase());
+    })
+    dispatch(setProductsList(newData))
 
-  // },[search])
+  },[search])
 
 
   return (

@@ -32,6 +32,7 @@ function Shop() {
       query.page = e.target.value;
       
       let page=document.querySelector(".in-active")
+      if(page)
       page.classList.remove('in-active');
 
       e.target.classList.add('in-active');

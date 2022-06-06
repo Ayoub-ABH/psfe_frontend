@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
-import { deleteUser, getAllUsers, reset } from "../../features/user/userSlice";
+import { deleteUser, getAllUsers, reset, setUsersList } from "../../features/user/userSlice";
 import { toast } from "react-toastify";
+
+
 
 function Users() {
   const [search,setSearch] = useState("");
   
   const navigate = useNavigate()
   const dispatch = useDispatch() 
-  const [users,setUsers] =useState([]);
-  const {allUsers,isSuccess,isLoading,message,isError} = useSelector(
+  const {allUsers,allUsersToSearch,isSuccess,isLoading,message,isError} = useSelector(
     (state) => state.users
   );
-
+  
   const columns = [
     {
       name: "IMAGE",
@@ -53,16 +54,19 @@ function Users() {
     await dispatch(getAllUsers())
     if(isSuccess) {
       toast.success(message)
+      
     }
     dispatch(reset())
   },[message])
 
+  
+
 
   useEffect(()=>{
-    const newData=allUsers.filter(dataItem =>{
+    const newData=allUsersToSearch.filter(dataItem =>{
       return dataItem.name.toLowerCase().match(search.toLowerCase());
     })
-    setUsers(newData)
+    dispatch(setUsersList(newData))
   },[search])
 
   return (

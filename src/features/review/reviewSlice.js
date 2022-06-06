@@ -5,6 +5,7 @@ import reviewService from "./reviewServices";
 const initialState = {
     productReviews:{},
     allReviews:[],
+    allReviewsToSearch:[],
     isSuccess: false,
     isLoading: false,
     isError: false,
@@ -94,7 +95,10 @@ const reviewSlice = createSlice({
         state.isSuccess = false;
         state.isError = false;
         state.message = "";
-      }
+      },
+      setReviewsList:(state,action)=>{
+        state.allReviews=action.payload;
+      },
 
     },
     extraReducers: (builder) => {
@@ -150,6 +154,8 @@ const reviewSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.allReviews = action.payload;
+        state.allReviewsToSearch = action.payload;
+
       })
       .addCase(getAllReviews.rejected, (state, action) => {
         state.isLoading = false;
@@ -161,5 +167,5 @@ const reviewSlice = createSlice({
 });
 
 
-export const { reset } = reviewSlice.actions;
+export const { reset,setReviewsList } = reviewSlice.actions;
 export default reviewSlice.reducer;

@@ -1,12 +1,55 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import { reset, updateUserFromAdmin } from '../../features/user/userSlice';
 
 const UpdateUser = () => {
-  const {allUsers} = useSelector(state=>state.users)
   const {id} = useParams();
-  const userInfo = allUsers.filter(user=>user._id===id)
-  console.log(userInfo)
+  const [userInfo,setUserInfo] = useState({
+    id:id,
+    role:"user",
+    name:"",
+    email:"",
+    password:""
+  })
+
+  const [fileData, setFileData] = useState();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const {isError,message,isSuccess} = useSelector(state=>state.users)
+
+
+  useEffect(()=>{
+    if(isError)
+    toast.error(message)
+
+    if(isSuccess) {
+      toast.success(message)
+      navigate("/admin/users")
+    }
+
+    dispatch(reset())
+  },[message])
+
+
+  const fileChangeHandler = (e) => {
+    setFileData(e.target.files[0]);
+  };
+
+  const handleInput = (e)=>{
+    setUserInfo({
+      ...userInfo,
+      [e.target.name]:e.target.value
+    })
+  }
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const data ={fileData,userInfo}
+    console.log(data)
+    dispatch(updateUserFromAdmin(data))
+  };
 
   return (
     <div className="section mt-80">
@@ -17,7 +60,7 @@ const UpdateUser = () => {
       
 
       <div className="admin-user-form">
-        <form>
+        <form onSubmit={onSubmitHandler}>
 
           <div className="form-group">
             
@@ -27,18 +70,17 @@ const UpdateUser = () => {
               type="text"
               name="name"
               placeholder="name"
-              value={userInfo[0].name}
-              //onChange={handleInput}
+              onChange={handleInput}
             />
           </div>
           
           <div class="form-group">
           <label>Role</label>
               <select name="role" class="input" 
-               value={userInfo[0].role}
+              onChange={handleInput}
               >
-                <option value="admin">Admin</option>
                 <option value="user">User</option>
+                <option value="admin">Admin</option>
               </select>
           </div>
           
@@ -49,9 +91,8 @@ const UpdateUser = () => {
               type="text"
               name="email"
               placeholder="Email"
-              value={userInfo[0].email}
 
-              //onChange={handleInput}
+              onChange={handleInput}
             />
           </div>
           <div className="form-group">
@@ -62,9 +103,8 @@ const UpdateUser = () => {
               name="password"
               placeholder="password"
 
-              value={userInfo[0].password}
 
-              //onChange={handleInput}
+              onChange={handleInput}
             />
           </div>
 
@@ -74,7 +114,7 @@ const UpdateUser = () => {
               type="file"
               name="image"
 
-              //onChange={handleInput}
+              onChange={fileChangeHandler}
             />
           </div>
          

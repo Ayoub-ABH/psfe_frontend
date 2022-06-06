@@ -4,6 +4,7 @@ import contactService from "./contactServices";
 
 const initialState = {
     allContacts:[],
+    allContactsToSearch:[],
     isSuccess: false,
     isLoading: false,
     isError: false,
@@ -76,7 +77,10 @@ const contactSlice = createSlice({
         state.isSuccess = false;
         state.isError = false;
         state.message = "";
-      }
+      },
+      setContactsList:(state,action)=>{
+        state.allContacts=action.payload;
+      },
 
     },
     extraReducers: (builder) => {
@@ -103,6 +107,7 @@ const contactSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.allContacts = action.payload;
+        state.allContactsToSearch = action.payload;
       })
       .addCase(getAllContacts.rejected, (state, action) => {
         state.isLoading = false;
@@ -128,5 +133,5 @@ const contactSlice = createSlice({
 });
 
 
-export const { reset } = contactSlice.actions;
+export const { reset,setContactsList} = contactSlice.actions;
 export default contactSlice.reducer;

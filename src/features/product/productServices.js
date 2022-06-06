@@ -57,6 +57,26 @@ const addProduct = async (productData) => {
   return response.data;
 }
 
+//update product 
+const updateProduct = async (productData) => {
+  const data = new FormData();
+ 
+  data.append("image", productData.fileData);
+  data.append("name",productData.product.name);
+  data.append("brand",productData.product.brand);
+  data.append("category",productData.product.category);
+  data.append("description",productData.product.description);
+  data.append("details",productData.product.details);
+  data.append("old_price",productData.product.old_price);
+  data.append("price",productData.product.price);
+  data.append("quantity",productData.product.quantity);
+
+  const response = await axios.put(API_URL+'update/'+productData.product.id,data,{
+    headers:{ "Content-Type": "multipart/form-data" }
+  })
+  return response.data;
+}
+
 //delete  a user
 const deleteProduct = async (idProduct) => {
   const response = await axios.delete(API_URL+"delete/"+idProduct);
@@ -70,7 +90,8 @@ const deleteProduct = async (idProduct) => {
     getOneProduct,
     getAllProductsAdmin,
     addProduct,
-    deleteProduct
+    deleteProduct,
+    updateProduct
   }
   
   export default productService;

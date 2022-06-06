@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link,  useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOrder, getAllOrders, reset } from "../../features/order/orderSlice";
+import { deleteOrder, getAllOrders, reset, setOrdersList } from "../../features/order/orderSlice";
 import { toast } from "react-toastify";
 
 function Orders() {
   const [search,setSearch] = useState("");
-  const [orders,setOrders] =useState([]);
+  // const [orders,setOrders] =useState([]);
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {allOrders,isSuccess,isLoading,message,isError} = useSelector(
+  const {allOrders,allOrdersToSearch,isSuccess,isLoading,message,isError} = useSelector(
     (state) => state.orders
   );
 
@@ -86,13 +86,13 @@ function Orders() {
     
   },[message])
 
-  // useEffect(()=>{
-  //   const newData=data.filter(dataItem =>{
-  //     return dataItem.user.toLowerCase().match(search.toLowerCase());
-  //   })
-  //   setOrders(newData)
+  useEffect(()=>{
+    const newData=allOrdersToSearch.filter(dataItem =>{
+      return dataItem.name.toLowerCase().match(search.toLowerCase());
+    })
+    dispatch(setOrdersList(newData))
 
-  // },[search])
+  },[search])
 
   return (
     <div className="section mt-80">

@@ -57,6 +57,24 @@ const updateUserProfile = async (data) => {
 }
 
 
+//update user from admin
+//update user with picture
+const updateUserFromAdmin = async (data) => {
+  const dataForm = new FormData();
+  dataForm.append("image", data.fileData);
+  dataForm.append("name",data.userInfo.name)
+  dataForm.append("role",data.userInfo.role)
+  dataForm.append("email",data.userInfo.email)
+  dataForm.append("password",data.userInfo.password)
+
+  const response = await axios.put(API_URL+'updateFromAdmin/'+data.userInfo.id,dataForm,{
+    headers:{ "Content-Type": "multipart/form-data" }
+  })
+  return response.data;
+}
+
+
+
 //get All users
 const getAllUsers = async () => {
   const response = await axios.get(API_URL+"all");
@@ -77,7 +95,8 @@ const userService = {
     addUser,
     getAllUsers,
     deleteUser,
-    updateUserProfile
+    updateUserProfile,
+    updateUserFromAdmin
   }
 
 export default userService;

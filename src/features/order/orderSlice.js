@@ -4,6 +4,7 @@ import orderService from "./orderServices";
 const initialState = {
   order:{},
   allOrders:[],
+  allOrdersToSearch:[],
   myOrders:[],
   isSuccess: false,
   isLoading: false,
@@ -110,7 +111,10 @@ export const updateOrderStatus = createAsyncThunk(
         state.isSuccess = false;
         state.isError = false;
         state.message = "";
-      }
+      },
+      setOrdersList:(state,action)=>{
+        state.allOrders=action.payload;
+      },
 
     },
     extraReducers: (builder) => {
@@ -133,6 +137,8 @@ export const updateOrderStatus = createAsyncThunk(
         state.isLoading = false;
         state.isSuccess = true;
         state.allOrders=action.payload;
+        state.allOrdersToSearch=action.payload;
+
       })
 
 
@@ -177,5 +183,5 @@ export const updateOrderStatus = createAsyncThunk(
 
 
 
-export const { reset } = orderSlice.actions;
+export const { reset,setOrdersList } = orderSlice.actions;
 export default orderSlice.reducer;

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
-import { deleteContact, getAllContacts, reset } from "../../features/contact/contactSlice";
+import { deleteContact, getAllContacts, reset, setContactsList } from "../../features/contact/contactSlice";
 import { toast } from "react-toastify";
 
 const Messages = () => {
   const [search, setSearch] = useState("");
-  const [messages, setMessages] = useState([]);
-  const {allContacts,message,isError,isSuccess} = useSelector(state=>state.contacts)
+  // const [messages, setMessages] = useState([]);
+  const {allContacts,allContactsToSearch,message,isError,isSuccess} = useSelector(state=>state.contacts)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -61,13 +61,13 @@ const Messages = () => {
     
   },[message])
 
-  // useEffect(()=>{
-  //   const newData=data.filter(dataItem =>{
-  //     return dataItem.name.toLowerCase().match(search.toLowerCase());
-  //   })
-  //   setMessages(newData)
+  useEffect(()=>{
+    const newData=allContactsToSearch.filter(dataItem =>{
+      return dataItem.name.toLowerCase().match(search.toLowerCase());
+    })
+    dispatch(setContactsList(newData))
 
-  // },[search])
+  },[search])
 
   return (
     <div className="section mt-80">

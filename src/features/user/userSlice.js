@@ -7,6 +7,7 @@ const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 const initialState = {
   user: userInfo ? userInfo.user : null,
   allUsers:[],
+  allUsersToSearch:[],
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -121,6 +122,24 @@ export const updateUserProfile = createAsyncThunk(
       return thunkAPI.rejectWithValue(message);
     }
   }
+) 
+
+//update user
+export const updateUserFromAdmin = createAsyncThunk(
+  "user/updateFromAdmin",
+  async (data, thunkAPI) => {
+    try {
+      return await userService.updateUserFromAdmin(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
 );
 
 
@@ -137,7 +156,10 @@ const userSlice = createSlice({
     logout:(state)=>{
       localStorage.removeItem('userInfo')
       state.user = null;
-    }
+    },
+    setUsersList:(state,action)=>{
+      state.allUsers=action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -211,13 +233,28 @@ const userSlice = createSlice({
         state.message = action.payload;
       })
 
+      .addCase(updateUserFromAdmin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUserFromAdmin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message=action.payload;
+      })
+      .addCase(updateUserFromAdmin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.allUsers = action.payload;
+        state.allUsersToSearch=action.payload;
       })
   },
 });
 
-export const { reset,logout} = userSlice.actions;
+export const { reset,logout,setUsersList} = userSlice.actions;
 export default userSlice.reducer;

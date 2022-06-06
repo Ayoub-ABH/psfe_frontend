@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import UserOrders from "../Components/Profile/UserOrders";
 import { reset, updateUserProfile } from "../features/user/userSlice";
@@ -7,7 +8,7 @@ import { reset, updateUserProfile } from "../features/user/userSlice";
 function Profile() {
   const { user } = useSelector((state) => state.users);
   const [userInfo,setUserInfo] = useState({
-    id:user._id,
+    id:user? user._id:null,
     name:"",
     email:"",
     password:""
@@ -15,7 +16,14 @@ function Profile() {
   const [fileData, setFileData] = useState();
   const dispatch = useDispatch()
   const {isError,message,isSuccess} = useSelector(state=>state.users)
+  const navigate = useNavigate()
 
+  useEffect(()=>{
+    if(!user){
+      toast.error("you should login as a user")
+      navigate("/login")
+    }
+  },[])
 
   useEffect(()=>{
  
@@ -61,15 +69,15 @@ function Profile() {
 
       <div className="row boxing" style={{ marginBottom: "25px" }}>
         <div className="col-lg-3 col-md-3 product-preview ">
-          <img src={`img/${user.profilePicture}`} alt="profile-image" />
+          <img src={`img/${user?user.profilePicture:"profile.png"}`} alt="profile-image" />
         </div>
 
         <div className="col-lg-4 col-md-6  profile-detail">
           <h3>profile informations</h3>
           <div className="profile-info">
-            <strong className="profile-title">Name: </strong> <h5>{user.name}</h5>
-            <strong className="profile-title">Role:</strong> <h5> {user.role}</h5>
-            <strong className="profile-title">Email:</strong><h5>{user.email}</h5>
+            <strong className="profile-title">Name: </strong> <h5>{user?user.name:""}</h5>
+            <strong className="profile-title">Role:</strong> <h5> {user?user.role:""}</h5>
+            <strong className="profile-title">Email:</strong><h5>{user?user.email:""}</h5>
           </div>
           
         </div>

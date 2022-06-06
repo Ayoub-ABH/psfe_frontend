@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
-import { deleteReview, getAllReviews, reset } from "../../features/review/reviewSlice";
+import { deleteReview, getAllReviews, reset, setReviewsList } from "../../features/review/reviewSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 function Reviews() {
   const [search, setSearch] = useState("");
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
   const dispatch = useDispatch()
-  const {allReviews,isSuccess,isLoading,message,isError} = useSelector(
+  const {allReviews,allReviewsToSearch,isSuccess,isLoading,message,isError} = useSelector(
     (state) => state.reviews
   );
 
@@ -61,12 +61,12 @@ function Reviews() {
     dispatch(reset())
   },[message])
 
-  // useEffect(() => {
-  //   const newData = data.filter((dataItem) => {
-  //     return dataItem.name.toLowerCase().match(search.toLowerCase());
-  //   });
-  //   setReviews(newData);
-  // }, [search]);
+  useEffect(() => {
+    const newData = allReviewsToSearch.filter((dataItem) => {
+      return dataItem.name.toLowerCase().match(search.toLowerCase());
+    });
+    dispatch(setReviewsList(newData))
+  }, [search]);
 
   return (
     <div className="section mt-80">

@@ -5,6 +5,7 @@ const initialState = {
   products: {new :[],top:[]}, 
   shopProducts:{},
   allProducts:[],
+  allProductsToSearch:[],
   categories:[],
   product:{},
   brands:[],
@@ -122,6 +123,25 @@ export const addProduct = createAsyncThunk(
   }
 );
 
+
+//update product 
+export const updateProduct = createAsyncThunk(
+  "product/update",
+  async (productData,thunkAPI) => {
+    try {
+      return await productService.updateProduct(productData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //delete product
 export const deleteProduct = createAsyncThunk(
   "product/delete",
@@ -142,6 +162,7 @@ export const deleteProduct = createAsyncThunk(
 
 
 
+
 const productSlice = createSlice({
     name: "product",
     initialState,
@@ -151,7 +172,10 @@ const productSlice = createSlice({
         state.isSuccess = false;
         state.isError = false;
         state.message = "";
-      }
+      },
+      setProductsList:(state,action)=>{
+        state.allProducts=action.payload;
+      },
 
     },
     extraReducers: (builder) => {
@@ -219,6 +243,7 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.allProducts=action.payload;
+        state.allProductsToSearch=action.payload;
       })
 
       .addCase(addProduct.pending, (state) => {
@@ -248,10 +273,24 @@ const productSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+
+      .addCase(updateProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message=action.payload;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
       
     },
 });
 
 
-export const { reset } = productSlice.actions;
+export const { reset,setProductsList } = productSlice.actions;
 export default productSlice.reducer;
