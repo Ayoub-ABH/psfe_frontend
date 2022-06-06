@@ -308,4 +308,11 @@
     margin: 10px auto;
     border-radius: 10px;
 }
+
+.profile-title{
+    color: #d10024;
+    font-size: 18px;
+    margin-bottom: 7px;
+    display: block;
+}
 /*Admin*/

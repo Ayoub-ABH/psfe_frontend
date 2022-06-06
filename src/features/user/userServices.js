@@ -39,6 +39,24 @@ const addUser = async (userData) => {
 
 
 
+//update user with picture
+const updateUserProfile = async (data) => {
+  const dataForm = new FormData();
+  dataForm.append("image", data.fileData);
+  dataForm.append("name",data.userInfo.name)
+  dataForm.append("email",data.userInfo.email)
+  dataForm.append("password",data.userInfo.password)
+
+  const response = await axios.put(API_URL+'update/'+data.userInfo.id,dataForm,{
+    headers:{ "Content-Type": "multipart/form-data" }
+  })
+  if(response.data)
+  localStorage.setItem('userInfo', JSON.stringify(response.data))
+  
+  return response.data;
+}
+
+
 //get All users
 const getAllUsers = async () => {
   const response = await axios.get(API_URL+"all");
@@ -58,7 +76,8 @@ const userService = {
     login,
     addUser,
     getAllUsers,
-    deleteUser
+    deleteUser,
+    updateUserProfile
   }
 
 export default userService;

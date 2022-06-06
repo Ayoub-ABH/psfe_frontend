@@ -28,7 +28,7 @@ const UserOrders = () => {
         <tbody>
 
         {myOrders.map(myOrder =>
-          <tr>
+          <tr key={myOrder._id}>
             <td>{myOrder.orderItems.length} products</td>
             <td>
                 <div style={{ paddingTop: "5px" }}>
