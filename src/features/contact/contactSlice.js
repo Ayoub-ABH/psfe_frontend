@@ -6,7 +6,7 @@ const initialState = {
     allContacts:[],
     allContactsToSearch:[],
     isSuccess: false,
-    isLoading: false,
+    isLoadingContact: false,
     isError: false,
     message: ""
   }
@@ -73,7 +73,7 @@ const contactSlice = createSlice({
     initialState,
     reducers: {
       reset: (state) => {
-        state.isLoading = false;
+        state.isLoadingContact = false;
         state.isSuccess = false;
         state.isError = false;
         state.message = "";
@@ -86,45 +86,41 @@ const contactSlice = createSlice({
     extraReducers: (builder) => {
       builder
       .addCase(addContact.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingContact = true;
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingContact = false;
         state.isSuccess = true;
         state.message = action.payload;
       })
       .addCase(addContact.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingContact = false;
         state.isError = true;
         state.message = action.payload;
       })
 
 
       .addCase(getAllContacts.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingContact = true;
       })
       .addCase(getAllContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingContact = false;
         state.isSuccess = true;
         state.allContacts = action.payload;
         state.allContactsToSearch = action.payload;
       })
-      .addCase(getAllContacts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
+    
 
       .addCase(deleteContact.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingContact = true;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingContact = false;
         state.isSuccess = true;
         state.message = action.payload;
       })
       .addCase(deleteContact.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingContact = false;
         state.isError = true;
         state.message = action.payload;
       })

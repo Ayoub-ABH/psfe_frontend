@@ -9,7 +9,7 @@ const initialState = {
   allUsers:[],
   allUsersToSearch:[],
   isSuccess: false,
-  isLoading: false,
+  isLoadingUser: false,
   isError: false,
   message: "",
 };
@@ -148,7 +148,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.isLoading = false;
+      state.isLoadingUser = false;
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
@@ -164,91 +164,94 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingUser = true;
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isSuccess = true;
       })
       .addCase(register.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isError = true;
         state.message = action.payload;
       })
 
       .addCase(login.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingUser = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isSuccess = true;
         state.user=action.payload.user;
       })
       .addCase(login.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isError = true;
         state.message = action.payload;
       })
 
       .addCase(addUser.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingUser = true;
       })
       .addCase(addUser.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isSuccess = true;
         state.message=action.payload;
       })
       .addCase(addUser.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isError = true;
         state.message = action.payload;
       })
 
       .addCase(deleteUser.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingUser = true;
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isSuccess = true;
         state.message=action.payload;
       })
       .addCase(deleteUser.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isError = true;
         state.message = action.payload;
       })
 
       .addCase(updateUserProfile.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingUser = true;
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isSuccess = true;
         state.user=action.payload.user;
         state.message='user updated';
       })
       .addCase(updateUserProfile.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isError = true;
         state.message = action.payload;
       })
 
       .addCase(updateUserFromAdmin.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingUser = true;
       })
       .addCase(updateUserFromAdmin.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isSuccess = true;
         state.message=action.payload;
       })
       .addCase(updateUserFromAdmin.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isError = true;
         state.message = action.payload;
       })
 
+      .addCase(getAllUsers.pending, (state) => {
+        state.isLoadingUser = true;
+      })
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingUser = false;
         state.isSuccess = true;
         state.allUsers = action.payload;
         state.allUsersToSearch=action.payload;

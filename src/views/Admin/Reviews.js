@@ -9,7 +9,7 @@ function Reviews() {
   const [search, setSearch] = useState("");
   // const [reviews, setReviews] = useState([]);
   const dispatch = useDispatch()
-  const {allReviews,allReviewsToSearch,isSuccess,isLoading,message,isError} = useSelector(
+  const {allReviews,allReviewsToSearch,isSuccess,message,isError} = useSelector(
     (state) => state.reviews
   );
 

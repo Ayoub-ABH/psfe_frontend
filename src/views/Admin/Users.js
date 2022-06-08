@@ -12,7 +12,7 @@ function Users() {
   
   const navigate = useNavigate()
   const dispatch = useDispatch() 
-  const {allUsers,allUsersToSearch,isSuccess,isLoading,message,isError} = useSelector(
+  const {allUsers,allUsersToSearch,isSuccess,message,isError} = useSelector(
     (state) => state.users
   );
   

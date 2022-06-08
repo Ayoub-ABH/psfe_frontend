@@ -18,7 +18,7 @@ function Register() {
   const {name,email,password,password2} = userForm;
 
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isError, isSuccess, message } = useSelector(
     (state) => state.users
   )
 

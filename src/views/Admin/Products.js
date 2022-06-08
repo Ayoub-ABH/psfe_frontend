@@ -10,7 +10,7 @@ function Products() {
   // const [products,setProducts] =useState([]);
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {allProducts,allProductsToSearch,isSuccess,isLoading,message,isError} = useSelector(
+  const {allProducts,allProductsToSearch,isSuccess,message,isError} = useSelector(
     (state) => state.products
   );
   

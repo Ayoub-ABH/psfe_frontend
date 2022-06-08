@@ -9,7 +9,7 @@ function Checkout() {
   const { cartItems, cartTotalQuantity, cartTotalAmount } = useSelector(
     (state) => state.cart
   );
-  const { isLoading, isError, isSuccess, message } = useSelector(
+  const {  isError, isSuccess, message } = useSelector(
     (state) => state.orders
   );
   const dispatch = useDispatch()

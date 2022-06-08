@@ -10,7 +10,7 @@ const initialState = {
   product:{},
   brands:[],
   isSuccess: false,
-  isLoading: false,
+  isLoadingProduct: false,
   isError: false,
   message: ""
 }
@@ -168,7 +168,7 @@ const productSlice = createSlice({
     initialState,
     reducers: {
       reset: (state) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = false;
         state.isError = false;
         state.message = "";
@@ -181,32 +181,32 @@ const productSlice = createSlice({
     extraReducers: (builder) => {
       builder
       .addCase(getHomeProducts.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingProduct = true;
       })
       .addCase(getHomeProducts.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.products=action.payload;
       })
       .addCase(getHomeProducts.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isError = true;
         state.message = action.payload;
       })
       
       
       .addCase(getAllProducts.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingProduct = true;
       })
       .addCase(getAllProducts.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.shopProducts=action.payload;
         state.brands=[...new Set(action.payload.docs.map((p) => p.brand))];
         state.categories=[...new Set(action.payload.docs.map((p) => p.category))];
       })
       .addCase(getAllProducts.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isError = true;
         state.message = action.payload;
       })
@@ -214,76 +214,80 @@ const productSlice = createSlice({
       
       
       .addCase(getSomeProducts.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.shopProducts=action.payload;
       })
       .addCase(getSomeProducts.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isError = true;
         state.message = action.payload;
       })
 
 
       .addCase(getOneProduct.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingProduct = true;
       })
       .addCase(getOneProduct.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.product=action.payload;
       })
       .addCase(getOneProduct.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isError = true;
         state.message = action.payload;
       })
 
+      .addCase(getAllProductsAdmin.pending, (state) => {
+        state.isLoadingProduct = true;
+      })
+
       .addCase(getAllProductsAdmin.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.allProducts=action.payload;
         state.allProductsToSearch=action.payload;
       })
 
       .addCase(addProduct.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingProduct = true;
       })
       .addCase(addProduct.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.message=action.payload;
       })
       .addCase(addProduct.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isError = true;
         state.message = action.payload;
       })
 
       .addCase(deleteProduct.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingProduct = true;
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.message=action.payload;
       })
       .addCase(deleteProduct.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isError = true;
         state.message = action.payload;
       })
 
       .addCase(updateProduct.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingProduct = true;
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isSuccess = true;
         state.message=action.payload;
       })
       .addCase(updateProduct.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingProduct = false;
         state.isError = true;
         state.message = action.payload;
       })

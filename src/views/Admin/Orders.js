@@ -10,7 +10,7 @@ function Orders() {
   // const [orders,setOrders] =useState([]);
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {allOrders,allOrdersToSearch,isSuccess,isLoading,message,isError} = useSelector(
+  const {allOrders,allOrdersToSearch,isSuccess,message,isError} = useSelector(
     (state) => state.orders
   );
 

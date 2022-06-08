@@ -7,7 +7,7 @@ const initialState = {
     allReviews:[],
     allReviewsToSearch:[],
     isSuccess: false,
-    isLoading: false,
+    isLoadingReview: false,
     isError: false,
     message: ""
   }
@@ -91,7 +91,7 @@ const reviewSlice = createSlice({
     initialState,
     reducers: {
       reset: (state) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         state.isSuccess = false;
         state.isError = false;
         state.message = "";
@@ -104,64 +104,60 @@ const reviewSlice = createSlice({
     extraReducers: (builder) => {
       builder
       .addCase(addReview.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingReview = true;
       })
       .addCase(addReview.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         state.isSuccess = true;
         state.message = action.payload.message;
       })
       .addCase(addReview.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         state.isError = true;
         state.message = action.payload;
       })
 
 
       .addCase(getReviews.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingReview = true;
       })
       .addCase(getReviews.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         state.isSuccess = true;
         state.productReviews = action.payload;
       })
       .addCase(getReviews.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         // state.isError = true;
         // state.message = action.payload;
       })
 
       .addCase(deleteReview.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingReview = true;
       })
       .addCase(deleteReview.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         state.isSuccess = true;
         state.message = action.payload.message;
       })
       .addCase(deleteReview.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         state.isError = true;
         state.message = action.payload;
       })
 
 
       .addCase(getAllReviews.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingReview = true;
       })
       .addCase(getAllReviews.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingReview = false;
         state.isSuccess = true;
         state.allReviews = action.payload;
         state.allReviewsToSearch = action.payload;
 
       })
-      .addCase(getAllReviews.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
+     
 
     },
 });

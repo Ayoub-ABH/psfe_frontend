@@ -36,15 +36,39 @@ import Contact from "./views/Contact";
 
 function App() {
 
-  const {isLoading } = useSelector(
+  const {isLoadingProduct } = useSelector(
     (state) =>state.products
+  )
+  const {isLoadingUser } = useSelector(
+    (state) =>state.users
+  )
+  const {isLoadingSettings } = useSelector(
+    (state) =>state.settings
+  )
+
+  const {isLoadingOrder } = useSelector(
+    (state) =>state.orders
+  )
+
+  const {isLoadingContact } = useSelector(
+    (state) =>state.contacts
+  )
+
+
+  const {isLoadingReview } = useSelector(
+    (state) =>state.reviews
   )
   
 
   return (
   <div className="App">
       <BrowserRouter>
-          {isLoading? <Spinner/>  : <></> } 
+          {isLoadingProduct? <Spinner/>  : <></> } 
+          {isLoadingUser? <Spinner/>  : <></> } 
+          {isLoadingSettings? <Spinner/>  : <></> } 
+          {isLoadingOrder? <Spinner/>  : <></> } 
+          {isLoadingContact? <Spinner/>  : <></> } 
+          {isLoadingReview? <Spinner/>  : <></> } 
           
 
           <Routes>

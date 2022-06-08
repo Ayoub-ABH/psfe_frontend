@@ -1,6 +1,8 @@
 import { addToCart } from "../../features/product/cartSlice";
 import { useDispatch } from 'react-redux';
 import Rating from "./Rating";
+import { Link } from 'react-router-dom'
+
 
 function ProductDetail(props) {
 
@@ -98,9 +100,9 @@ function ProductDetail(props) {
             </div>
             <ul className="product-btns">
               <li>
-                <a href="#">
+                <Link to="/">
                   <i className="fa fa-heart-o" /> add to wishlist
-                </a>
+                </Link>
               </li>
               
             </ul>
@@ -114,24 +116,24 @@ function ProductDetail(props) {
             <ul className="product-links">
               <li>Share:</li>
               <li>
-                <a href="#">
+                <Link to="/">
                   <i className="fa fa-facebook" />
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/">
                   <i className="fa fa-twitter" />
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/">
                   <i className="fa fa-google-plus" />
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/">
                   <i className="fa fa-envelope" />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
